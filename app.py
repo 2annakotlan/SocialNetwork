@@ -14,7 +14,7 @@ st.title("Google Sheets Integration")
 name = st.text_input("Enter your name:")
 
 # When all inputs are filled, send the data to Google Apps Script
-if name and email and age:
+if name:
     # Prepare the data to send in the POST request
     data = {"name": name}
 

@@ -1,19 +1,23 @@
-import requests
 import streamlit as st
+import requests
 
-# Streamlit interface to collect name input
+# Web app URL from Apps Script
+url = "https://script.google.com/macros/s/AKfycbwDhkYaN5UXnZwZ8Zdhy0M13wAG5c9gQ3jHWShRMFZndeiqU-IkjE10L6dFYuPTChvUeQ/exec"
+
+# Title of the Streamlit app
 st.title("Google Sheets Integration")
 
+# Input for the name
 name = st.text_input("Enter your name:")
 
-if name:  # Only trigger the POST request if the name is provided
-    url = "https://script.google.com/macros/s/AKfycbwWmHa7QazzgSmMMLRkujc0npQ6_Zr2JP7Hki9W9VilrqgKllTiipB-HOHSSdZqDaSc7g/exec"
-    data = {"name": name}  # The data you want to send (name in this case)
+if name:
+    # Prepare the data to send in the POST request
+    data = {"name": name}
 
-    # Send POST request to the Apps Script Web App
+    # Send the POST request to the web app URL
     response = requests.post(url, json=data)
 
-    # Provide feedback based on the response status
+    # Handle the response
     if response.status_code == 200:
         st.success("Data successfully sent!")
     else:

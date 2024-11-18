@@ -1,5 +1,8 @@
 import streamlit as st
-st.write("hello")
 
-name = input("Please Enter your Name: ")
-st.write(name)
+# Use Streamlit's text_input for user input
+name = st.text_input("Please enter your name:")
+
+# Display the user's input if provided
+if name:
+    st.write(f"Your name is: {name}")

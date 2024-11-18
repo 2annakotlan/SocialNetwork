@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import webbrowser
 
 # Web app URL from Apps Script
 url = "https://script.google.com/macros/s/AKfycbwDhkYaN5UXnZwZ8Zdhy0M13wAG5c9gQ3jHWShRMFZndeiqU-IkjE10L6dFYuPTChvUeQ/exec"
@@ -25,7 +24,7 @@ if name:
     if response.status_code == 200:
         st.success("Data successfully sent!")
         
-        # Open the Google Sheets file in the browser after success
-        webbrowser.open(sheet_url)  # This will open the Google Sheets URL
+        # Display the link to Google Sheets that the user can click
+        st.markdown(f"Click [here](<{sheet_url}>) to view the updated Google Sheets.")
     else:
         st.error(f"Failed to send data. Status code: {response.status_code}")

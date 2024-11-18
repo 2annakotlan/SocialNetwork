@@ -1,8 +1,8 @@
 import streamlit as st
 import requests
 
-# Web app URL from Apps Script
-url = "https://script.google.com/macros/s/AKfycbwDhkYaN5UXnZwZ8Zdhy0M13wAG5c9gQ3jHWShRMFZndeiqU-IkjE10L6dFYuPTChvUeQ/exec"
+# Web app URL from Google Apps Script
+url = "https://script.google.com/macros/s/AKfycbznlffgWfUxLqix1FLQGEKXpZaXj3mHs0cZq6fGE2iN79YKz2SpKKWfNsImDOvfdvVX/exec"
 
 # Google Sheets URL (replace with your actual Google Sheets URL)
 sheet_url = "https://docs.google.com/spreadsheets/d/1WL1kmqjkMLjNAavhUhNptuSaZ7-7vQEycnDVoDz7mAk/edit"  # Replace with your sheet URL
@@ -10,10 +10,11 @@ sheet_url = "https://docs.google.com/spreadsheets/d/1WL1kmqjkMLjNAavhUhNptuSaZ7-
 # Title of the Streamlit app
 st.title("Google Sheets Integration")
 
-# Input for the name
+# Inputs for data
 name = st.text_input("Enter your name:")
 
-if name:
+# When all inputs are filled, send the data to Google Apps Script
+if name and email and age:
     # Prepare the data to send in the POST request
     data = {"name": name}
 
@@ -23,8 +24,6 @@ if name:
     # Handle the response
     if response.status_code == 200:
         st.success("Data successfully sent!")
-        
-        # Display the link to Google Sheets that the user can click
         st.markdown(f"Click [here](<{sheet_url}>) to view the updated Google Sheets.")
     else:
         st.error(f"Failed to send data. Status code: {response.status_code}")

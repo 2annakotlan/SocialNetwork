@@ -25,3 +25,15 @@ if st.button("Submit"):
             st.error(f"There was an error saving the name. Status Code: {response.status_code}")
     else:
         st.warning("Please enter a name.")
+
+import pandas as pd
+
+# Publicly shared Google Sheet CSV link
+csv_url = "https://docs.google.com/spreadsheets/d/14ExBLiXSqPKFI6jBvwGH63b1LiItPp64To68d36K7GE/export?format=csv"
+
+# Load the data into a DataFrame
+df = pd.read_csv(csv_url)
+
+# Print the DataFrame
+st.write(df)
+

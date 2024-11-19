@@ -17,7 +17,8 @@ action = st.selectbox("What would you like to do?", ["Append", "Delete"])
 if st.button("Submit"):
     if name:
         # Determine the action (append or delete)
-        action_value = "delete" if action == "Delete" else "append"
+        action_value = "delete" if action == "Delete" 
+        action_value = "append" if action == "Append" 
 
         # Log the action and name being sent
         st.write(f"Sending name: {name} with action: {action_value}")

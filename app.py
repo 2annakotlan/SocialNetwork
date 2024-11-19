@@ -15,25 +15,13 @@ name = st.text_input("Enter your name:")
 action = st.selectbox("What would you like to do?", ["Append", "Delete"])
 
 if st.button("Submit"):
-    if name:
-        # Determine the action (append or delete)
-        action_value = "delete" if action == "Delete" 
-        action_value = "append" if action == "Append" 
-
-        # Log the action and name being sent
-        st.write(f"Sending name: {name} with action: {action_value}")
-
-        # Send the name and action to the Google Apps Script
-        response = requests.post(web_app_url, data={'name': name, 'action': action_value})
-        
-        # Log the response for debugging
-        st.write("Response Status Code:", response.status_code)
-        st.write("Response Content:", response.text)
-
+    # Send the name and action to the Google Apps Script
+    if name:  # Ensure the name is not empty
+        response = requests.post(web_app_url, data={'name': name, 'action': action})
         if response.status_code == 200:
-            st.success(response.text)  # Display the exact message returned from the Apps Script
+            st.success("Name successfully submitted!")
         else:
-            st.error(f"There was an error. Status Code: {response.status_code} - {response.text}")
+            st.error(f"Failed to submit. Status code: {response.status_code}")
     else:
         st.warning("Please enter a name.")
 

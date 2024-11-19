@@ -15,9 +15,13 @@ if st.button("Submit"):
         # Send the name to the Google Apps Script
         response = requests.post(web_app_url, data={'name': name})
         
+        # Log the response for debugging
+        st.write("Response Status Code:", response.status_code)
+        st.write("Response Content:", response.text)
+
         if response.status_code == 200:
             st.success(f"Name '{name}' has been saved successfully!")
         else:
-            st.error("There was an error saving the name.")
+            st.error(f"There was an error saving the name. Status Code: {response.status_code}")
     else:
         st.warning("Please enter a name.")

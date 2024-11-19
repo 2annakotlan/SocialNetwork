@@ -1,29 +1,23 @@
 import streamlit as st
 import requests
 
-# Web app URL from Google Apps Script
-url = "https://script.google.com/macros/s/AKfycbznlffgWfUxLqix1FLQGEKXpZaXj3mHs0cZq6fGE2iN79YKz2SpKKWfNsImDOvfdvVX/exec"
+# The URL of your deployed Google Apps Script web app
+web_app_url = "https://script.google.com/macros/s/AKfycbzpnW2AmxdMTr7qhE0b-Sx4pgqnUgpT4_T8lP1Nbk4jHryR_dGxi6j-ReEWLx6XNx_N6Q/exec"
 
-# Google Sheets URL (replace with your actual Google Sheets URL)
-sheet_url = "https://docs.google.com/spreadsheets/d/1WL1kmqjkMLjNAavhUhNptuSaZ7-7vQEycnDVoDz7mAk/edit"  # Replace with your sheet URL
+# Streamlit app code
+st.title("Enter Your Name")
 
-# Title of the Streamlit app
-st.title("Google Sheets Integration")
-
-# Inputs for data
+# Input box for the user to enter their name
 name = st.text_input("Enter your name:")
 
-# When all inputs are filled, send the data to Google Apps Script
-if name:
-    # Prepare the data to send in the POST request
-    data = {"name": name}
-
-    # Send the POST request to the web app URL
-    response = requests.post(url, json=data)
-
-    # Handle the response
-    if response.status_code == 200:
-        st.success("Data successfully sent!")
-        st.markdown(f"Click [here](<{sheet_url}>) to view the updated Google Sheets.")
+if st.button("Submit"):
+    if name:
+        # Send the name to the Google Apps Script
+        response = requests.post(web_app_url, data={'name': name})
+        
+        if response.status_code == 200:
+            st.success(f"Name '{name}' has been saved successfully!")
+        else:
+            st.error("There was an error saving the name.")
     else:
-        st.error(f"Failed to send data. Status code: {response.status_code}")
+        st.warning("Please enter a name.")

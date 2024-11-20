@@ -2,21 +2,19 @@ import streamlit as st
 import requests
 import pandas as pd
 
-# Google Apps Script web app URL
 web_app_url = "https://script.google.com/macros/s/AKfycbzpnW2AmxdMTr7qhE0b-Sx4pgqnUgpT4_T8lP1Nbk4jHryR_dGxi6j-ReEWLx6XNx_N6Q/exec"
+name = st.text_input("Enter your name to remove:")
 
-# Input for the name of the row to delete
-name = st.text_input("Enter the name of the row to delete:")
-
-if st.button("Delete"):
-    if name.strip():  # Ensure the input is not empty
-        try:
-            response = requests.post(web_app_url, data={'name': name})
-            if response.status_code == 200:
-                st.success(f"Response: {response.text}")
-            else:
-                st.error(f"Error: {response.status_code}. Response: {response.text}")
-        except Exception as e:
-            st.error(f"An exception occurred: {e}")
+if st.button("Delete Name"):
+    # Send a POST request to the Google Apps Script to remove the name
+    response = requests.post(web_app_url, data={'name': name})
+    
+    if response.status_code == 200:
+        st.success(f"Name '{name}' has been successfully removed.")
     else:
-        st.error("Please enter a valid name.")
+        st.error(f"Failed to remove the name '{name}'. Please try again.")
+
+# Display the current data in the sheet (optional)
+csv_url = "https://docs.google.com/spreadsheets/d/14ExBLiXSqPKFI6jBvwGH63b1LiItPp64To68d36K7GE/export?format=csv"
+df = pd.read_csv(csv_url)
+st.write(df)

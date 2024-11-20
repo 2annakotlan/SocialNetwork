@@ -13,7 +13,7 @@ if st.button("Delete Name"):
     if name:  # Check if the name input is not empty
         # Send a POST request to delete the name
         response = requests.post(web_app_url, data={'name': name})
-        
+
         # Debugging: Print the response content to check for errors
         st.write("Response from Google Apps Script:", response.text)
 

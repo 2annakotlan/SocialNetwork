@@ -14,13 +14,18 @@ if st.button("Delete Name"):
         # Send a POST request to delete the name
         response = requests.post(web_app_url, data={'name': name})
         
-        # Check the response from the Google Apps Script
-        if response.text == "Row deleted successfully":
+        # Debugging: Print the response content to check for errors
+        st.write("Response from Google Apps Script:", response.text)
+
+        # Handle different responses from the script
+        if "Row deleted successfully" in response.text:
             st.success(f"Name '{name}' has been successfully removed.")
-        elif response.text == "Name not found":
+        elif "Name not found" in response.text:
             st.error(f"Name '{name}' was not found in the list.")
+        elif "Error" in response.text:
+            st.error(f"Error: {response.text}")
         else:
-            st.error("An error occurred while trying to delete the name.")
+            st.error("An unexpected error occurred.")
     else:
         st.error("Please enter a name to delete.")
 

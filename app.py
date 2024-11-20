@@ -8,7 +8,8 @@ web_app_url = "https://script.google.com/macros/s/AKfycbzpnW2AmxdMTr7qhE0b-Sx4pg
 # Button to trigger the deletion
 if st.button("Delete Last Row"):
     response = requests.post(web_app_url)  # Send POST request without additional data
-    st.write(response.text)  # Display the response message
+    st.write("Response status code:", response.status_code)  # Display status code
+    st.write("Response text:", response.text)  # Display the response message
 
 # Fetch and display the updated sheet data
 csv_url = "https://docs.google.com/spreadsheets/d/14ExBLiXSqPKFI6jBvwGH63b1LiItPp64To68d36K7GE/export?format=csv"

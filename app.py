@@ -2,14 +2,14 @@ import streamlit as st
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 
-# Path to your service account JSON file
-SERVICE_ACCOUNT_FILE = r'C:\Users\Anna Kotlan\OneDrive\Documents\Other\SocialNetwork\socialnetwork123-45d0a148d7d6.json'
+# Load the credentials from Streamlit secrets
+service_account_info = st.secrets["google_service_account"]
 
 # Define the scope for the API
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
-# Authenticate the service account
-credentials = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+# Authenticate the service account using the information from Streamlit secrets
+credentials = Credentials.from_service_account_info(service_account_info, scopes=SCOPES)
 
 # Build the Sheets API client
 service = build('sheets', 'v4', credentials=credentials)

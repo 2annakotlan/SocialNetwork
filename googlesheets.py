@@ -12,12 +12,21 @@ def get_sheet_data(service):
     data = result.get('values', [])
     return pd.DataFrame(data[1:], columns=data[0]) if data else pd.DataFrame()
 
-def append_row_to_sheet(service, column, input):
+def append_row_to_sheet(service, columnA=None, columnB=None, columnC=None, columnD=None):
     df = get_sheet_data(service)  
     new_row = [''] * len(df.columns)  
-    column_index = df.columns.get_loc(column)  
-    new_row[column_index] = input 
-    service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',range="Sheet1",valueInputOption="RAW",body={'values': [new_row]}).execute()
-    return df 
+    
+    if columnA is not None:
+        new_row[df.columns.get_loc('columnA')] = columnA
+    if columnB is not None:
+        new_row[df.columns.get_loc('columnB')] = columnB
+    if columnC is not None:
+        new_row[df.columns.get_loc('columnC')] = columnC
+    if columnD is not None:
+        new_row[df.columns.get_loc('columnD')] = columnD
+    
+    service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range="Sheet1", valueInputOption="RAW", body={'values': [new_row]}).execute()
+    return df  
+
 
 

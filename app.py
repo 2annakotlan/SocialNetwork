@@ -1,8 +1,9 @@
 import streamlit as st
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
+import json
 
-# Load the credentials from Streamlit secrets
+# Load service account credentials from Streamlit secrets
 service_account_info = st.secrets["google_service_account"]
 
 # Define the scope for the API

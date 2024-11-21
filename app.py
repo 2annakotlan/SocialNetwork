@@ -8,7 +8,7 @@ service = get_sheets_service()
 name = st.text_input("Enter name to append:")
 
 # Specify the column where the name should be added
-column = "Name"  # Change this to the correct column name if needed
+column = "0_degree"  # Change this to the correct column name if needed
 
 if st.button("Append Name"):
     if name:

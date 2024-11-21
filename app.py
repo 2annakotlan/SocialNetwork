@@ -23,6 +23,11 @@ sheet = service.spreadsheets()
 result = sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).execute()
 rows = result.get('values', [])
 
-# Display the data
-st.write("Here is the data:")
-st.table(rows)
+# If data exists, make the first row the headers and the rest the data
+if rows:
+    headers = rows[0]  # First row as headers
+    data = rows[1:]  # All subsequent rows as data
+
+    # Display the data with the first row as column names
+    st.write("Here is the data:")
+    st.table(data)  # This will display the table with rows and columns

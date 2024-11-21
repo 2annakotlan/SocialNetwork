@@ -7,14 +7,19 @@ from google.oauth2.service_account import Credentials
 service = build('sheets', 'v4', credentials=Credentials.from_service_account_info(st.secrets["google_service_account"], scopes=['https://www.googleapis.com/auth/spreadsheets']))  # Authenticate and build client
 SPREADSHEET_ID = '1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro'
 
-# Fetch data from Google Sheets
-sheet = service.spreadsheets().get(spreadsheetId=SPREADSHEET_ID).execute()['sheets'][0]
-last_row, last_column = sheet['properties']['gridProperties'].values()
-RANGE_NAME = f"Sheet1!A1:{chr(64 + last_column)}{last_row}"
-rows = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).execute().get('values', [])
+# Function to fetch the data from Google Sheets
+def fetch_data_from_sheets():
+    # Fetch data from Google Sheets
+    sheet = service.spreadsheets().get(spreadsheetId=SPREADSHEET_ID).execute()['sheets'][0]
+    last_row, last_column = sheet['properties']['gridProperties'].values()
+    RANGE_NAME = f"Sheet1!A1:{chr(64 + last_column)}{last_row}"
+    rows = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).execute().get('values', [])
 
-# Create DataFrame
-df = pd.DataFrame(rows[1:], columns=rows[0])  # Use first row as headers
+    # Create DataFrame
+    return pd.DataFrame(rows[1:], columns=rows[0])  # Use first row as headers
+
+# Initially load data
+df = fetch_data_from_sheets()
 
 # Display data in Streamlit
 st.write("Here is the data:")
@@ -31,9 +36,15 @@ if new_name and new_name not in df['name'].values:
     
     # Optionally update the Google Sheet with the new row (ensure data is correct)
     new_data = df.values.tolist()
-    service.spreadsheets().values().update(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME, valueInputOption="RAW", body={"values": [df.columns.tolist()] + new_data}).execute()
+    service.spreadsheets().values().update(spreadsheetId=SPREADSHEET_ID, range=f"Sheet1!A1", valueInputOption="RAW", body={"values": [df.columns.tolist()] + new_data}).execute()
 
+    # Reload the data from Google Sheets to reflect the update
+    df = fetch_data_from_sheets()
+    
+    # Display updated data in Streamlit
     st.write(f"Name '{new_name}' has been added to the dataframe and updated in the sheet.")
+    st.write("Here is the updated data:")
+    st.dataframe(df)
 else:
     if new_name:
         st.write(f"Name '{new_name}' already exists in the dataframe.")

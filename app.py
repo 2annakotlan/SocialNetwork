@@ -17,5 +17,5 @@ if submit:
         df = append_row_to_sheet(get_sheets_service(), name, friends, interests, activities)
         st.success("Info added!")
         st.write(df)
-    else:
+else:
         st.warning("Please fill in 'Name' and 'Interests'.")

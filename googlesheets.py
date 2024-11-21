@@ -18,5 +18,5 @@ def get_googlesheets_data(sheets_service):
     sheet_rows = sheet_data.get('values', [])  # Extract rows, default to empty list if no data
     return pd.DataFrame(sheet_rows[1:], columns=sheet_rows[0])  # First row as column headers
 
-sheets_service = get_api()
+sheets_service = get_googlesheets_api()
 df = get_sheets_data(sheets_service)

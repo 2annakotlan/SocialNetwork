@@ -15,13 +15,22 @@ credentials = Credentials.from_service_account_info(service_account_info, scopes
 # Build the Sheets API client
 service = build('sheets', 'v4', credentials=credentials)
 
-# Specify the Spreadsheet ID and range
+# Specify the Spreadsheet ID
 SPREADSHEET_ID = '1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro'  # Replace with your actual Spreadsheet ID
-RANGE_NAME = 'Sheet1!A1:B5'  # Adjust range to match your data (expand if needed)
+
+# First, retrieve the sheet's metadata to determine the number of rows and columns
+sheet_metadata = service.spreadsheets().get(spreadsheetId=SPREADSHEET_ID).execute()
+sheet = sheet_metadata['sheets'][0]  # Assumes only one sheet or you can change the index if necessary
+
+# Determine the last row with data in the sheet
+last_row = sheet['properties']['gridProperties']['rowCount']
+last_column = sheet['properties']['gridProperties']['columnCount']
+
+# Retrieve data from the entire sheet range from A1 to the last row and column
+RANGE_NAME = f"Sheet1!A1:{chr(64 + last_column)}{last_row}"  # Build dynamic range (e.g., A1:B5)
 
 # Retrieve data from the specified range
-sheet = service.spreadsheets()
-result = sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).execute()
+result = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).execute()
 rows = result.get('values', [])
 
 # If data exists, create a pandas DataFrame using the first row as headers

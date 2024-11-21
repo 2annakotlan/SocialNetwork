@@ -1,3 +1,4 @@
+import pandas as pd
 import streamlit as st
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
@@ -16,18 +17,21 @@ service = build('sheets', 'v4', credentials=credentials)
 
 # Specify the Spreadsheet ID and range
 SPREADSHEET_ID = '1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro'  # Replace with your actual Spreadsheet ID
-RANGE_NAME = 'Sheet1!A1:A5'  # Replace with your desired range
+RANGE_NAME = 'Sheet1!A1:B5'  # Adjust range to match your data (expand if needed)
 
 # Retrieve data from the specified range
 sheet = service.spreadsheets()
 result = sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).execute()
 rows = result.get('values', [])
 
-# If data exists, make the first row the headers and the rest the data
+# If data exists, create a pandas DataFrame using the first row as headers
 if rows:
     headers = rows[0]  # First row as headers
-    data = rows[1:]  # All subsequent rows as data
+    data = rows[1:]    # All subsequent rows as data
 
-    # Display the data with the first row as column names
+    # Create a DataFrame with the first row as columns
+    df = pd.DataFrame(data, columns=headers)
+
+    # Display the DataFrame in Streamlit
     st.write("Here is the data:")
-    st.table(data)  # This will display the table with rows and columns
+    st.dataframe(df)

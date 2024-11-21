@@ -24,5 +24,9 @@ result = sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).exec
 rows = result.get('values', [])
 
 # Display the data
-st.write("Here is the data:")
-st.table(rows)
+if not rows:
+    st.warning("No data found.")
+else:
+    st.success("Data retrieved successfully!")
+    st.write("Here is the data:")
+    st.table(rows)

@@ -1,6 +1,7 @@
 import pandas as pd
-from google.oauth2.service_account import Credentials
+import streamlit as st
 from googleapiclient.discovery import build
+from google.oauth2.service_account import Credentials
 
 def get_googlesheets_api():
     service_account_credentials = st.secrets["google_service_account"]  # Load service account credentials

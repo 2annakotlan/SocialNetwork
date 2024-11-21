@@ -1,7 +1,6 @@
 import streamlit as st
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
-import json
 
 # Load service account credentials from Streamlit secrets
 service_account_info = st.secrets["google_service_account"]
@@ -25,9 +24,5 @@ result = sheet.values().get(spreadsheetId=SPREADSHEET_ID, range=RANGE_NAME).exec
 rows = result.get('values', [])
 
 # Display the data
-if not rows:
-    st.warning("No data found.")
-else:
-    st.success("Data retrieved successfully!")
-    st.write("Here is the data:")
-    st.table(rows)
+st.write("Here is the data:")
+st.table(rows)

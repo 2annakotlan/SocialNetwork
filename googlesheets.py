@@ -11,13 +11,19 @@ def get_googlesheets_api():
     return sheets_service
     
 def get_googlesheets_data(sheets_service):
-    sheet_info = sheets_service.spreadsheets().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro').execute()
+    spreadsheet_id = '1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro'  # Define spreadsheet ID 
+    sheet_info = sheets_service.spreadsheets().get(spreadsheetId=spreadsheet_id).execute()
     sheet_properties = sheet_info['sheets'][0]['properties']['gridProperties']
-    num_rows, num_columns = sheet_properties['values']  # Get last row and column
+    
+    num_rows = sheet_properties['rowCount'] 
+    num_columns = sheet_properties['columnCount'] 
+    
     data_range = f"Sheet1!A1:{chr(64 + num_columns)}{num_rows}"  # Define the range to fetch data
     sheet_data = sheets_service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=data_range).execute()
     sheet_rows = sheet_data.get('values', [])  # Extract rows, default to empty list if no data
+    
     return pd.DataFrame(sheet_rows[1:], columns=sheet_rows[0])  # First row as column headers
 
 sheets_service = get_googlesheets_api()
 df = get_googlesheets_data(sheets_service)
+

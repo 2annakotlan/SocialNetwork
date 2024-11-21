@@ -21,6 +21,5 @@ def get_googlesheets_data(sheets_service):
     sheet_rows = sheet_data.get('values', [])  
     return pd.DataFrame(sheet_rows[1:], columns=sheet_rows[0])  
 
-sheets_service = get_googlesheets_api()
-df = get_googlesheets_data(sheets_service)
+
 

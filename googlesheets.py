@@ -8,7 +8,7 @@ def get_googlesheets_api():
     google_credentials = Credentials.from_service_account_info(service_account_credentials, scopes=api_scopes)
     sheets_service = build('sheets', 'v4', credentials=google_credentials)
     return sheets_service
-
+    
 def get_googlesheets_data(sheets_service):
     sheet_info = sheets_service.spreadsheets().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro').execute()
     sheet_properties = sheet_info['sheets'][0]['properties']['gridProperties']
@@ -18,6 +18,5 @@ def get_googlesheets_data(sheets_service):
     sheet_rows = sheet_data.get('values', [])  # Extract rows, default to empty list if no data
     return pd.DataFrame(sheet_rows[1:], columns=sheet_rows[0])  # First row as column headers
 
-# Usage
 sheets_service = get_api()
 df = get_sheets_data(sheets_service)

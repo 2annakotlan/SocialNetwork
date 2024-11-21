@@ -1,5 +1,5 @@
 import streamlit as st
-from your_first_file import get_sheets_service, append_row_to_sheet
+from googlesheets import get_sheets_service, append_row_to_sheet
 
 st.set_page_config(page_title="Add Info", layout="centered")
 st.title("Add Your Information")

@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-#from googlesheets import df
+from googlesheets import df
 
-st.write("ehllo")
+st.write(df)
 

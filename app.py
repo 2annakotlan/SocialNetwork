@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 
 web_app_url = "https://script.google.com/macros/s/AKfycbzpnW2AmxdMTr7qhE0b-Sx4pgqnUgpT4_T8lP1Nbk4jHryR_dGxi6j-ReEWLx6XNx_N6Q/exec"
-name = st.text_input("Enter your name:")
+name = st.text_input("Enter name:")
 if st.button("Submit"):
     response = requests.post(web_app_url, data={'name': name})
 

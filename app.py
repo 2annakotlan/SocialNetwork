@@ -1,8 +1,9 @@
 import pandas as pd
 import streamlit as st
-from googlesheets import df
+from googlesheets import get_googlesheets_api, get_googlesheets_data
 
-# Display data in Streamlit
-st.write("Here is the data:")
-st.dataframe(df)
-
+while True:
+    sheets_service = get_googlesheets_api()
+    df = get_googlesheets_data(sheets_service)
+    st.write(df)
+    time.sleep(10)

@@ -21,8 +21,6 @@ def append_row_to_sheet(service, name, friends, interests, activities):
 def delete_row_by_name(service, name):
     df = get_sheet_data(service)
     row_to_delete = df[df['name'] == name].index
-
-    # If the name is found, delete the row from the sheet
     if not row_to_delete.empty:
         row_index = row_to_delete[0] + 2  
         service.spreadsheets().values().clear(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f"Sheet1!A{row_index}:D{row_index}").execute()

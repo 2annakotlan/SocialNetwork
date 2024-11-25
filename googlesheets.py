@@ -11,8 +11,8 @@ def get_sheets_service():
 
 def get_sheet_data(service):
     result = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range="Sheet1").execute()
-    data = result.get('values', [])
-    return pd.DataFrame(data[1:], columns=data[0]) if data else pd.DataFrame()
+    data = result.get('values', []) # if no data is found, return an empty list
+    return pd.DataFrame(data[1:], columns=data[0]) if data else pd.DataFrame() # if empty list, return an empty dataframe
 
 def append_row_to_sheet(service, name, friends, interests, activities):
     df = get_sheet_data(service)
@@ -26,6 +26,8 @@ def delete_row_by_name(service, name):
     if not row_to_delete.empty:
         row_index = row_to_delete[0] + 2  
         service.spreadsheets().values().clear(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f"Sheet1!A{row_index}:D{row_index}").execute()
+    else:
+        print(f"Error: No row found with the name '{name}' to delete.") # if name does not exist, print error message        
     return df
 
 def edit_row_by_name(service, name, new_friends, new_interests, new_activities):

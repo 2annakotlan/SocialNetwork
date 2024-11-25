@@ -15,6 +15,7 @@ def get_sheet_data(service):
 def append_row_to_sheet(service, name, friends, interests, activities):
     if not name or not interests:
         st.error("Name and Interests cannot be empty!")
+        return(None)
     new_row = [name, friends, interests, activities]
     service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range="Sheet1", valueInputOption="RAW", body={'values': [new_row]}).execute()
     st.success("Info added!")

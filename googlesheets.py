@@ -13,6 +13,9 @@ def get_sheet_data(service):
     return pd.DataFrame(data[1:], columns=data[0]) if data else pd.DataFrame() # if empty list, return an empty dataframe
 
 def append_row_to_sheet(service, name, friends, interests, activities):
+    if not name or not interests:
+        st.error("Name and Interests cannot be empty!")
+        return None
     friends = friends if friends else ""
     activities = activities if activities else ""
     new_row = [name, friends, interests, activities]

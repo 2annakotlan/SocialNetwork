@@ -1,6 +1,4 @@
-# googlesheets.py
 import streamlit as st
-
 import pandas as pd
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
@@ -25,9 +23,7 @@ def delete_row_by_name(service, name):
     row_to_delete = df[df['name'] == name].index
     if not row_to_delete.empty:
         row_index = row_to_delete[0] + 2  
-        service.spreadsheets().values().clear(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f"Sheet1!A{row_index}:D{row_index}").execute()
-    else:
-        print(f"Error: No row found with the name '{name}' to delete.") # if name does not exist, print error message        
+        service.spreadsheets().values().clear(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f"Sheet1!A{row_index}:D{row_index}").execute()     
     return df
 
 def edit_row_by_name(service, name, new_friends, new_interests, new_activities):

@@ -14,5 +14,5 @@ with st.form(key="input_form"):
     edit = st.form_submit_button("Edit Entry")
 
 if add:
-    df = append_row_to_sheet(get_sheets_service(), name, friends or "", interests, activities or "")
+    df = append_row_to_sheet(get_sheets_service(), name, friends, interests, activities)
 

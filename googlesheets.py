@@ -13,23 +13,22 @@ def get_sheet_data(service):
     return pd.DataFrame(data[1:], columns=data[0]) 
 
 def create_account(service, name, friends, interests, activities):
-    new_row = [name, friends, interests, activities]
-    service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range="Sheet1", valueInputOption="RAW", body={'values': [new_row]}).execute()
+    row = [name, friends, interests, activities]
+    service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range="Sheet1", valueInputOption="RAW", body={'values': [row]}).execute()
     st.success("Account Created")
     return get_sheet_data(service)
 
 def delete_account(service, name):
     df = get_sheet_data(service)
-    row_to_delete = df[df['name'] == name].index
-    row_index = row_to_delete[0] + 2  
+    row_index = df[df['name'] == name].index[0] + 2
     service.spreadsheets().values().clear(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f"Sheet1!A{row_index}:D{row_index}").execute()   
     st.success("Account Deleted")
     return df
 
 def edit_account(service, name, friends, interests, activities):
     df = get_sheet_data(service)
-    row_to_edit = df[df['name'] == name].index
-    row_index = row_to_edit[0] + 2  
-    updated_row = [name, friends, interests, activities]
-    service.spreadsheets().values().update(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f"Sheet1!A{row_index}:D{row_index}", valueInputOption="RAW", body={'values': [updated_row]}).execute()
+    row_index = df[df['name'] == name].index[0] + 2
+    row = [name, friends, interests, activities]
+    service.spreadsheets().values().update(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f"Sheet1!A{row_index}:D{row_index}", valueInputOption="RAW", body={'values': [row]}).execute()
+    st.success("Information Edited")
     return df

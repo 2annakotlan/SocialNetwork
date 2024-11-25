@@ -12,7 +12,7 @@ def get_sheet_data(service):
     data = result.get('values', []) # if no data is found, return an empty list
     return pd.DataFrame(data[1:], columns=data[0]) if data else pd.DataFrame() # if empty list, return an empty dataframe
 
-def append_row_to_sheet(service, name, friends, interests, activities):
+def create_account(service, name, friends, interests, activities):
     if not name or not interests:
         st.error("Name and Interests cannot be empty!")
         return(None)
@@ -21,7 +21,7 @@ def append_row_to_sheet(service, name, friends, interests, activities):
     st.success("Account created!")
     return get_sheet_data(service)
 
-def delete_row_by_name(service, name):
+def delete_account(service, name):
     df = get_sheet_data(service)
     row_to_delete = df[df['name'] == name].index
     if not row_to_delete.empty:
@@ -30,7 +30,7 @@ def delete_row_by_name(service, name):
         st.success("Account deleted!")
     return df
 
-def edit_row_by_name(service, name, new_friends, new_interests, new_activities):
+def edit_account(service, name, new_friends, new_interests, new_activities):
     df = get_sheet_data(service)
     row_to_edit = df[df['name'] == name].index
     if not row_to_edit.empty:

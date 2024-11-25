@@ -16,10 +16,8 @@ with st.form(key="input_form"):
 
 # Handle form submission
 if submit:
-    friends = friends if friends else ""
-    activities = activities if activities else ""
-    df = append_row_to_sheet(get_sheets_service(), name, friends, interests, activities)
-    st.success("Info added!")
+    # Default 'friends' and 'activities' to empty string if not provided
+    df = append_row_to_sheet(get_sheets_service(), name, friends or "", interests, activities or "")
     st.write(df)
 
 # Handle row deletion

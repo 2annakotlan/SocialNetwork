@@ -18,7 +18,7 @@ def append_row_to_sheet(service, name, friends, interests, activities):
         return(None)
     new_row = [name, friends, interests, activities]
     service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range="Sheet1", valueInputOption="RAW", body={'values': [new_row]}).execute()
-    st.success("Info added!")
+    st.success("Account created!")
     return get_sheet_data(service)
 
 def delete_row_by_name(service, name):
@@ -26,7 +26,8 @@ def delete_row_by_name(service, name):
     row_to_delete = df[df['name'] == name].index
     if not row_to_delete.empty:
         row_index = row_to_delete[0] + 2  
-        service.spreadsheets().values().clear(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f"Sheet1!A{row_index}:D{row_index}").execute()     
+        service.spreadsheets().values().clear(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f"Sheet1!A{row_index}:D{row_index}").execute()   
+        st.success("Account deleted!")
     return df
 
 def edit_row_by_name(service, name, new_friends, new_interests, new_activities):

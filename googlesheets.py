@@ -13,27 +13,17 @@ def get_sheet_data(service):
     return pd.DataFrame(data[1:], columns=data[0]) if data else pd.DataFrame() # if empty list, return an empty dataframe
 
 def append_row_to_sheet(service, name, friends, interests, activities):
-    # Check if 'friends' and 'activities' are empty and set them to empty strings if needed
     friends = friends if friends else ""
     activities = activities if activities else ""
     
-    # Ensure 'name' and 'interests' are provided (required fields)
     if not name or not interests:
         st.error("Name and Interests are required fields.")
-        return None  # Return None to indicate an error occurred
+        return None
     
-    # Retrieve the current sheet data as a DataFrame
-    df = get_sheet_data(service)
-    
-    # Create a new row with the provided information
     new_row = [name, friends, interests, activities]
-    
-    # Use the Sheets API to append the new row to the sheet
     service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range="Sheet1", valueInputOption="RAW", body={'values': [new_row]}).execute()
-    
-    # Return the updated DataFrame
     st.success("Info added!")
-    return df
+    return get_sheet_data(service)
 
 
 def delete_row_by_name(service, name):

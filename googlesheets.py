@@ -26,10 +26,10 @@ def delete_account(service, name):
     st.success("Account Deleted")
     return df
 
-def edit_account(service, name, new_friends, new_interests, new_activities):
+def edit_account(service, name, friends, interests, activities):
     df = get_sheet_data(service)
     row_to_edit = df[df['name'] == name].index
     row_index = row_to_edit[0] + 2  
-    updated_row = [name, new_friends, new_interests, new_activities]
+    updated_row = [name, friends, interests, activities]
     service.spreadsheets().values().update(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f"Sheet1!A{row_index}:D{row_index}", valueInputOption="RAW", body={'values': [updated_row]}).execute()
     return df

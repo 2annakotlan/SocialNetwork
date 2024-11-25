@@ -20,5 +20,5 @@ if delete:
     df = delete_account(get_sheets_service(), name)
 
 if edit: 
-    df = edit_account(get_sheets_service(), name, new_friends, new_interests, new_activities)
+    df = edit_account(get_sheets_service(), name, friends, interests, activities)
 

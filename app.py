@@ -16,3 +16,5 @@ with st.form(key="input_form"):
 if add:
     df = append_row_to_sheet(get_sheets_service(), name, friends, interests, activities)
 
+if delete:
+    df = delete_row_by_name(get_sheets_service(), name, friends, interests, activities)

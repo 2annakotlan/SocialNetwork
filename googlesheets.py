@@ -1,5 +1,6 @@
+# googlesheets.py
+
 import pandas as pd
-import streamlit as st
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 
@@ -48,5 +49,4 @@ def edit_row_by_name(service, name, new_friends, new_interests, new_activities):
         return df
     else:
         # If the name is not found
-        st.warning(f"No entry found for {name}.")
-        return df
+        return None

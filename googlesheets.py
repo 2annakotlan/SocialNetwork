@@ -9,8 +9,8 @@ def get_sheets_service():
 
 def get_sheet_data(service):
     result = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range="Sheet1").execute()
-    data = result.get('values', []) # if no data is found, return an empty list
-    return pd.DataFrame(data[1:], columns=data[0]) if data else pd.DataFrame() # if empty list, return an empty dataframe
+    data = result.get('values', []) 
+    return pd.DataFrame(data[1:], columns=data[0]) 
 
 def create_account(service, name, friends, interests, activities):
     new_row = [name, friends, interests, activities]

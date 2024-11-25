@@ -7,7 +7,7 @@ st.title("Add Your Information")
 with st.form(key="input_form"):
     name = st.text_input("Name:")
     friends = st.text_area("Friends (comma separated):", value="")
-    interests = st.text_area("Interests (comma separated):")
+    interests = st.text_area("Interests (comma separated):", value="")
     activities = st.text_area("Activities (comma separated):", value="")
     add = st.form_submit_button("Create Account")
     delete = st.form_submit_button("Delete Account")

@@ -1,5 +1,5 @@
 import streamlit as st
-from googlesheets import get_sheets_service, append_row_to_sheet, delete_row_by_name, edit_row_by_name
+from googlesheets import get_sheets_service, create_account, delete_account, edit_account
 
 st.set_page_config(page_title="Add Info", layout="centered")
 st.title("Add Your Information")

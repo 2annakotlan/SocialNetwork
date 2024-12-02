@@ -11,10 +11,8 @@ def display_landing_page():
  
 def display_student_login_page():
     st.write("Student Login Page")
-    if st.button("Back"):
-        st.session_state.page = 'landing_page' 
+    display_button("Back", "landing_page")
     
 def display_admin_login_page():
     st.write("Admin Login Page")
-    if st.button("Back"):
-        st.session_state.page = 'landing_page' 
+    display_button("Back", "landing_page")

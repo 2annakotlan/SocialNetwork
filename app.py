@@ -11,12 +11,16 @@ def display_landing_page():
 
 def display_student_login_page():
     st.write("Student Login Page")
-    display_button("Next", "student_profile_page")
+    email = st.text_input("Enter your email:")
+    if email:
+        display_button("Next", "student_profile_page")
     display_button("Back", "landing_page")
 
 def display_admin_login_page():
     st.write("Admin Login Page")
-    display_button("Next", "admin_landing_page")
+    email = st.text_input("Enter your email:")
+    if email:
+        display_button("Next", "admin_landing_page")
     display_button("Back", "landing_page")
 
 def display_student_profile_page():

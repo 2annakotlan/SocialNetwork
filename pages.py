@@ -1,11 +1,13 @@
 import streamlit as st
 
+def display_button(label, target_page):
+    if st.button(label):
+        st.session_state.page = target_page
+
 def display_landing_page():
     st.write("Landing Page")
-    if st.button("Student Login"):
-        st.session_state.page = 'student_login_page' 
-    if st.button("Admin Login"):
-        st.session_state.page = 'admin_login_page' 
+    display_button("Student Login", "student_login_page")
+    display_button("Admin Login", "admin_login_page")
  
 def display_student_login_page():
     st.write("Student Login Page")

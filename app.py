@@ -11,3 +11,5 @@ if st.session_state.page == 'admin_login_page':
     display_admin_login_page()
 if st.session_state.page == 'student_login_page':
     display_student_login_page()
+if st.session_state.page == 'student_profile_page':
+    display_student_profile_page()

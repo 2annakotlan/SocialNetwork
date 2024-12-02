@@ -33,20 +33,10 @@ def display_student_landing_page():
     display_button("Edit Profile", "student_profile_page")
     display_button("Log out", "landing_page")
 
-
 if 'page' not in st.session_state:
     st.session_state.page = 'landing_page'
 
-page_functions = {
-    'landing_page': display_landing_page,
-    'student_login_page': display_student_login_page,
-    'admin_login_page': display_admin_login_page,
-    'student_profile_page': display_student_profile_page,
-    'admin_landing_page': display_admin_landing_page,
-    'student_landing_page': display_student_landing_page
-}
+page_functions = {name[8:]: func for name, func in globals().items() if name.startswith('display_')}
 
 if st.session_state.page in page_functions:
     page_functions[st.session_state.page]()
-else:
-    st.error("Page not found!")

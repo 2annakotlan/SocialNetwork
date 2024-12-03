@@ -4,21 +4,6 @@ def display_button(label, target_page):
     if st.button(label):
         st.session_state.page = target_page
 
-def display_email_buttons(target_page):
-    email = st.text_input("Email:")
-    
-    if st.button("Login"):
-        if email.endswith("@gmail.com"): 
-            st.session_state.page = target_page
-        else:
-            st.error("Invalid email. Please use a Gmail address.")
-    
-    if st.button("Sign Up"):
-        if email:
-            st.success("Sign-up successful! Please log in.")
-        else:
-            st.error("Please enter a valid email to sign up.")
-
 def display_landing_page():
     st.write("Landing Page")
     display_button("Student", "student_start_page")

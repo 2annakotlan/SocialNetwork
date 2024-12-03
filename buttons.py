@@ -6,20 +6,22 @@ def display_button(label, target_page):
         
 def display_email_buttons(login_target_page, signup_target_page):
     email = st.text_input("Email:")
+    existing_domain = "@gmail.com"
+    non_existing_domain = "@yahoo.com"
     
     if st.button("Login"):
-        if email.endswith("@gmail.com"): 
-            st.session_state.page = target_page
-        else:
-            st.error("Invalid email. Please use a Gmail address.")
-    
+        if email == f"admin{existing_domain}"
+            st.session_state.page = login_target_page
+        if not email.startswith(f"admin"):
+            st.error("Please use an admin email")
+        elif not email.endswith(existing_domain): 
+            st.error("Please use an existing domain")
+
     if st.button("Sign Up"):
-        # Check if email starts with "admin"
-        if not email.startswith("admin"):
-            st.error("Sign-up failed! Please use an admin email.")
-        # Check if email ends with "@gmail.com"
-        elif email.endswith("@gmail.com"):
-            st.warning("Account already exists. Logging in...")
-        # If both checks pass
-        else:
-            st.success("Sign-up successful! Please log in.")
+        if email == f"admin{non_existing_domain}"
+            st.session_state.page = signup_target_page
+        if not email.startswith(f"admin"):
+            st.error("Please use an admin email")
+        elif not email.endswith(non_existing_domain): 
+            st.error("Domain already exists")
+

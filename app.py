@@ -14,8 +14,8 @@ def display_email_button(target_page):
 
 def display_landing_page():
     st.write("Landing Page")
-    display_button("Student Login", "student_login_page")
-    display_button("Admin Login", "admin_login_page")
+    display_button("Student Login", "student_start_page")
+    display_button("Admin Login", "admin_start_page")
 
 def display_student_login_page():
     st.write("Student Login Page")

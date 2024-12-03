@@ -12,7 +12,7 @@ def display_email_buttons(login_target_page, signup_target_page):
     if st.button("Login"):
         if email == f"admin{existing_domain}"
             st.session_state.page = login_target_page
-        if not email.startswith(f"admin"):
+        elif not email.startswith(f"admin"):
             st.error("Please use an admin email")
         elif not email.endswith(existing_domain): 
             st.error("Please use an existing domain")
@@ -20,7 +20,7 @@ def display_email_buttons(login_target_page, signup_target_page):
     if st.button("Sign Up"):
         if email == f"admin{non_existing_domain}"
             st.session_state.page = signup_target_page
-        if not email.startswith(f"admin"):
+        elif not email.startswith(f"admin"):
             st.error("Please use an admin email")
         elif not email.endswith(non_existing_domain): 
             st.error("Domain already exists")

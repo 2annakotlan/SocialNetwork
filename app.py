@@ -17,12 +17,12 @@ def display_landing_page():
     display_button("Student Login", "student_start_page")
     display_button("Admin Login", "admin_start_page")
 
-def display_student_login_page():
+def display_student_start_page():
     st.write("Student Login Page")
     display_email_button("student_profile_page")
     display_button("Back", "landing_page")
 
-def display_admin_login_page():
+def display_admin_start_page():
     st.write("Admin Login Page")
     display_email_button("admin_landing_page")
     display_button("Back", "landing_page")

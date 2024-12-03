@@ -5,9 +5,11 @@ def display_button(label, target_page):
         st.session_state.page = target_page
         
 def display_email_buttons(login_target_page, signup_target_page):
-    email = st.text_input("Email:")
+    #email = st.text_input("Email:")
+    email = st.text_input("Email:", value="admin:")
     existing_domain = "@gmail.com"
     non_existing_domain = not existing_domain
+    
     
     if st.button("Login"):
         if email == f"admin{existing_domain}":

@@ -5,7 +5,7 @@ def display_button(label, target_page):
         st.session_state.page = target_page
 
 def display_email_button(target_page):
-    email = st.text_input("Enter your email:")
+    email = st.text_input("Email:")
     if st.button("Login"):
         if email.endswith("@gmail.com"): 
             st.session_state.page = target_page
@@ -14,8 +14,10 @@ def display_email_button(target_page):
 
 def display_landing_page():
     st.write("Landing Page")
-    display_button("Student Login", "student_login_page")
-    display_button("Admin Login", "admin_login_page")
+    #display_button("Student Login", "student_login_page")
+    display_email_button("student_profile_page")
+    display_email_button("admin_landing_page")
+    #display_button("Admin Login", "admin_login_page")
 
 def display_student_login_page():
     st.write("Student Login Page")

@@ -26,7 +26,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
     existing_domain = "@gmail.com" 
     
-    if st.button("Next"):
+    if st.button("Enter"):
         if email.startswith("admin") and email.endswith(existing_domain):
             st.session_state.page = login_target_page
             st.success("Logging In")

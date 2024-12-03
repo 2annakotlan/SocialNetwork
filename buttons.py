@@ -1,3 +1,5 @@
+import streamlit as st
+
 def display_button(label, target_page):
     if st.button(label):
         st.session_state.page = target_page

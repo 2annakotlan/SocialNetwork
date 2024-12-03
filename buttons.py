@@ -19,7 +19,7 @@ def display_student_email_button(login_target_page, signup_target_page):
             st.session_state.page = login_target_page
             st.success("Signing Up")
             time.sleep(3)  
-        elif email.startswith("admin):
+        elif email.startswith("admin"):
             st.error("Looks like you are trying to sign in as an administrator.")
         elif not email.endswith(existing_domain):
             st.error("Your organization has not created an account with us.")

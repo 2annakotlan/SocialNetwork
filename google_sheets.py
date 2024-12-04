@@ -32,3 +32,26 @@ def edit_account(service, name, friends, interests, activities):
     service.spreadsheets().values().update(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f"Sheet1!A{row_index}:D{row_index}", valueInputOption="RAW", body={'values': [row]}).execute()
     st.success("Information Edited")
     return df
+
+##############################################################################################################################################
+def get_sheet_data_2(service):
+    result = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range="Institutions").execute()
+    data = result.get('values', []) 
+    return pd.DataFrame(data[1:], columns=data[0]) 
+
+def create_account_2(service, institution):
+    row = [name, friends, interests, activities]
+    service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range="Institutions", valueInputOption="RAW", body={'values': [row]}).execute()
+    st.success("Admin Account Created")
+    return get_sheet_data_2(service)
+
+
+
+
+
+
+
+
+
+
+

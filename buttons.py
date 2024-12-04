@@ -43,7 +43,7 @@ import streamlit as st
 import pandas as pd
 import time
 from googleapiclient.discovery import build
-from googlesheets import *
+from google_sheets import *
 
 # Function to fetch email domains from the Google Sheet
 def get_sheet_data_2(service):

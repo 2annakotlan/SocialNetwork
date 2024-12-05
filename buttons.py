@@ -43,6 +43,6 @@ def display_admin_email_button(login_target_page, signup_target_page):
 def display_admin_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
     existing_domain = get_sheet_column_data("Institutions", "institution")
-    st.write(existing_domain)
+    password = st.text_input("Password:")
     
                           

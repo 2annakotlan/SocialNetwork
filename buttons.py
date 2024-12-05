@@ -45,5 +45,5 @@ from google_sheets import *
 def display_admin_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
 
-    a = get_sheet_column_data(service, Institutions, institution)
+    a = get_sheet_column_data(service, "Institutions", "institution")
     st.write(a)

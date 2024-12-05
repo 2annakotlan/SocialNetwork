@@ -44,6 +44,6 @@ def display_admin_email_button(login_target_page, signup_target_page):
 def display_admin_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
 
-    a = get_sheet_column_data("Institutions", "institutions")
+    a = get_sheet_column_data("Institutions", "institution")
     
                           

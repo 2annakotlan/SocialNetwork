@@ -11,11 +11,33 @@ service = get_sheets_service()
 
 def get_sheet_column_data(sheet_name, column_name):
     result = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=sheet_name).execute()
+    data = result.get('values', [])
+
+    # Print the data for debugging
+    print("Data retrieved from sheet:", data)
+
+    # Check if the data is empty
+    if not data or len(data) < 2:
+        raise ValueError(f"Not enough data in the sheet '{sheet_name}'.")
+
+    # Create the DataFrame and handle the case where column names are missing or mismatched
+    df = pd.DataFrame(data[1:], columns=data[0])
+    
+    # Check if the column exists
+    if column_name not in df.columns:
+        raise ValueError(f"Column '{column_name}' not found in the sheet '{sheet_name}'.")
+
+    return df[[column_name]]
+
+
+'''
+def get_sheet_column_data(sheet_name, column_name):
+    result = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=sheet_name).execute()
     data = result.get('values', []) 
     df = pd.DataFrame(data[1:], columns=data[0])
     return df[[column_name]]
 
-'''
+
 def get_sheet_data(service, sheet_name):
     result = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=sheet_name).execute()
     data = result.get('values', []) 

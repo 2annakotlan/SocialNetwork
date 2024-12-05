@@ -41,8 +41,6 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.error("Please use an admin email")
 '''
 
-
-
 def display_admin_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
 

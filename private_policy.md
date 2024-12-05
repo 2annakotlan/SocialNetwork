@@ -1,7 +1,3 @@
-Sure! Here's a more concise and professional version of your **Privacy Policy**:
-
----
-
 # **Privacy Policy**
 
 ## 1. **Introduction**
@@ -52,6 +48,3 @@ We may update this Privacy Policy periodically. Changes will be communicated via
 For questions or concerns, contact us at:  
 **Email**: [2annakotlan@gmail.com](mailto:2annakotlan@gmail.com)
 
----
-
-This version is more streamlined while maintaining a professional tone. Let me know if any additional changes are needed!

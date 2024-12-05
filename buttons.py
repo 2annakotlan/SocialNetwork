@@ -45,18 +45,5 @@ from google_sheets import *
 def display_admin_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
 
-    # Fetch the institution data from the Google Sheet
-    service = get_sheets_service()
-    institutions_df = get_sheet_data(service, "Institutions")  # Get the entire DataFrame
-    existing_domains = institutions_df['institution'].tolist()  # Extract 'institution' column as a list of domains
-
-    if st.button("Enter"):
-        # Check if the email ends with any of the valid domains
-        if email.startswith("admin") and any(email.endswith(domain) for domain in existing_domains):
-            st.session_state.page = login_target_page
-            st.success("Logging In")
-            time.sleep(3)  
-        else:
-            st.session_state.page = signup_target_page
-            st.success("Signing Up")
-            time.sleep(3)
+    a = get_sheet_column_data(service, Institutions, institution)
+    st.write(a)

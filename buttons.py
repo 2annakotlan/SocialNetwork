@@ -40,10 +40,9 @@ def display_admin_email_button(login_target_page, signup_target_page):
         elif not email.startswith("admin"):
             st.error("Please use an admin email")
 '''
-
 def display_admin_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
-
-    a = get_sheet_column_data("Institutions", "institution")
+    existing_domain = get_sheet_column_data("Institutions", "institution")
+    st.write(existing_domain)
     
                           

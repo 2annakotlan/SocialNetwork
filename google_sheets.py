@@ -7,13 +7,20 @@ def get_sheets_service():
     credentials = Credentials.from_service_account_info(st.secrets["google_service_account"], scopes=['https://www.googleapis.com/auth/spreadsheets'])
     return build('sheets', 'v4', credentials=credentials)
 
-service = get_sheets_service()
+#service = get_sheets_service()
 
 def get_sheet_column_data(sheet_name, column_name):
     result = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=sheet_name).execute()
     data = result.get('values', []) 
     df = pd.DataFrame(data[1:], columns=data[0])
     return df[[column_name]]
+
+def create_new_sheet(new_sheet_name):
+    service.spreadsheets().batchUpdate(
+        spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
+        body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}
+    ).execute()
+    
 '''
 
 def get_sheet_data(service, sheet_name):

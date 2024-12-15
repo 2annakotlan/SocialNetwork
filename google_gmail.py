@@ -1,3 +1,4 @@
+'''
 import smtplib
 import random
 from email.mime.text import MIMEText
@@ -41,4 +42,4 @@ def send_email():
   else:
       print("Invalid verification code. Please try again.")
       
-    
+'''

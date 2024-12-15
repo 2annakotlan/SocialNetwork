@@ -21,14 +21,9 @@ def create_new_sheet(new_sheet_name):
         body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
 
 def append_values(input_data, sheet_name, column_name):
-    # Ensure input_data is a single value and append it as a list of one item
-    service.spreadsheets().values().append(
-        spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
-        range=f'{sheet_name}!{column_name}:{column_name}',  # Correct range format
-        valueInputOption="RAW",
-        body={'values': [[input_data]]}  # Automatically wrap input_data as a single-item list
-    ).execute()
-
+    headers = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!1:1').execute().get('values', [])[0]
+    col = chr(65 + headers.index(column_name))
+    service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!{col}:{col}', valueInputOption="RAW", body={'values': [[input_data]]}).execute()
 '''
 
 def get_sheet_data(service, sheet_name):

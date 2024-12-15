@@ -12,15 +12,15 @@ def display_student_email_button(login_target_page, signup_target_page):
     existing_username = "akotlan"
     
     if st.button("Enter"):
-        if email.startswith(existing_username) and email.endswith(existing_domain): 
+        if email.startswith(existing_username) and email.endswith(existing_domain): # existing email --> logging in
             st.session_state.page = login_target_page
             st.success("Logging In")
             time.sleep(3)  
-        elif not email.startswith(existing_username) and email.endswith(existing_domain):
+        elif not email.startswith(existing_username) and email.endswith(existing_domain): # not existing email, but existing domain --> signing up
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
             time.sleep(3)  
-        elif not email.endswith(existing_domain): 
+        elif not email.endswith(existing_domain): # not existing domain --> error message
             st.error("Your organization has not created an account with us.")
 
 '''

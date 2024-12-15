@@ -18,9 +18,11 @@ def get_sheet_column_data(sheet_name, column_name):
 def create_new_sheet(new_sheet_name):
     service.spreadsheets().batchUpdate(
         spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
-        body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}
-    ).execute()
-    
+        body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
+
+def append_values(input_data, sheet_name, column_name):
+    service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!{column_name}1', valueInputOption='RAW', body={'values': [[input_data]]}).execute()
+
 '''
 
 def get_sheet_data(service, sheet_name):

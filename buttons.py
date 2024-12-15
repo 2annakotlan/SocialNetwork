@@ -23,26 +23,19 @@ def display_student_email_button(login_target_page, signup_target_page):
         elif not email.endswith(existing_domain): # not existing domain --> error message
             st.error("Your organization has not created an account with us.")
 
-'''
 def display_admin_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
-    existing_domain = "@gmail.com" 
+    existing_email = "admin@gmail.com"
     
     if st.button("Enter"):
-        if email.startswith("admin") and email.endswith(existing_domain):
+        if email == existing_email # existing email --> logging in
             st.session_state.page = login_target_page
             st.success("Logging In")
             time.sleep(3)  
-        elif email.startswith("admin") and not email.endswith(existing_domain):
-            st.session_state.page = signup_target_page
+        else: # not existing admin email --> signing up
+            st.session_state.page = signup_target_page  
             st.success("Signing Up")
             time.sleep(3)  
-        elif not email.startswith("admin"):
-            st.error("Please use an admin email")
-'''
-def display_admin_email_button(login_target_page, signup_target_page):
-    email = st.text_input("Email:")
-    existing_domain = get_sheet_column_data("Institutions", "institution")
-    password = st.text_input("Password:")
+
     
                           

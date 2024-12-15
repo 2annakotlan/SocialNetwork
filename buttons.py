@@ -25,10 +25,10 @@ def display_student_email_button(login_target_page, signup_target_page):
 
 def display_admin_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
-    existing_email = "admin@gmail.com"
+    existing_admin_email = "admin@gmail.com"
     
     if st.button("Enter"):
-        if email == existing_email # existing email --> logging in
+        if email == existing_admin_email # existing email --> logging in
             st.session_state.page = login_target_page
             st.success("Logging In")
             time.sleep(3)  

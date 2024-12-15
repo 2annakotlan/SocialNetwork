@@ -24,13 +24,12 @@ def display_student_email_button(login_target_page, signup_target_page):
             st.error("Your organization has not created an account with us.")
 
 def display_admin_email_button(login_target_page, signup_target_page):
-    valid_emails = get_sheet_column_data("Institutions", "institution").tolist()
-    st.write(valid_emails)
+    existing_emails = get_sheet_column_data("Institutions", "institution")
+    st.write(existing_emails)
     email = st.text_input("Email:")
-    existing_email = "admin@gmail.com"
     
     if st.button("Enter"):
-        if email == existing_email: # existing email --> logging in
+        if email in existing_emails.values: # existing email --> logging in
             st.session_state.page = login_target_page
             st.success("Logging In")
             time.sleep(3)  

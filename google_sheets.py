@@ -22,9 +22,20 @@ def create_new_sheet(new_sheet_name):
 
 def append_values(input_data, sheet_name, column_name):
     headers = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!1:1').execute().get('values', [])[0]
+    col_letter = chr(65 + headers.index(column_name))  # Convert column index to letter
+    service.spreadsheets().values().append(
+        spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', 
+        range=f'{sheet_name}!{col_letter}:{col_letter}', 
+        valueInputOption="RAW", 
+        body={'values': [[input_data]]}
+    ).execute()
+
+'''
+def append_values(input_data, sheet_name, column_name):
+    headers = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!1:1').execute().get('values', [])[0]
     col = chr(65 + headers.index(column_name))
     service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!{col}:{col}', valueInputOption="RAW", body={'values': [[input_data]]}).execute()
-'''
+
 
 def get_sheet_data(service, sheet_name):
     result = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=sheet_name).execute()

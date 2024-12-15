@@ -8,12 +8,12 @@ def display_landing_page():
 
 def display_student_start_page():
     st.write("Student Start Page")
-    #display_student_email_button("student_landing_page", "student_profile_page")
+    display_student_email_button("student_landing_page", "student_profile_page")
     display_button("Back", "landing_page")
 
 def display_admin_start_page():
     st.write("Admin Start Page")
-    #display_admin_email_button("admin_landing_page", "admin_profile_page")
+    display_admin_email_button("admin_landing_page", "admin_profile_page")
     display_button("Back", "landing_page")
 
 def display_student_profile_page():

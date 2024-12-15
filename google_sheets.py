@@ -21,7 +21,7 @@ def create_new_sheet(new_sheet_name):
         body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
 
 def append_values(input_data, sheet_name, column_name):
-    service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!{column_name}1', valueInputOption='RAW', body={'values': [[input_data]]}).execute()
+    service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!{column_name}', valueInputOption='RAW', body={'values': [[input_data]]}).execute()
 
 '''
 

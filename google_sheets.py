@@ -21,8 +21,14 @@ def create_new_sheet(new_sheet_name):
         body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
 
 def append_values(input_data, sheet_name, column_name):
-    service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!{column_name}', valueInputOption='RAW', body={'values': [[input_data]]}).execute()
-
+    # Use the append method which automatically handles adding data to the next available row
+    range_name = f'{sheet_name}!{column_name}:{column_name}'  # Reference the entire column
+    service.spreadsheets().values().append(
+        spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
+        range=range_name,
+        valueInputOption='RAW',
+        body={'values': [[input_data]]}
+    ).execute()
 '''
 
 def get_sheet_data(service, sheet_name):

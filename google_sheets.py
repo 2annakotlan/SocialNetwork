@@ -23,7 +23,7 @@ def create_new_sheet(new_sheet_name):
 def append_values(input_data, sheet_name, column_name):
     headers = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!1:1').execute().get('values', [])[0]
     col_letter = chr(65 + headers.index(column_name))  # Convert column index to letter
-    print(f"The index for column '{column_name}' is: {col_letter}")
+    st.write(col_letter)
     service.spreadsheets().values().append(
         spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', 
         range=f'{sheet_name}!{col_letter}:{col_letter}', 

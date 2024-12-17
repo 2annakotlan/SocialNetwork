@@ -9,11 +9,11 @@ def get_sheets_service():
 
 service = get_sheets_service()
 
-def get_sheet_column_data(sheet_name, column_name, row_name):
+def get_sheet_column_data(sheet_name, column_name):
     result = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=sheet_name).execute()
     data = result.get('values', []) 
     df = pd.DataFrame(data[1:], columns=data[0])
-    return df.iloc[row_name][[column_name]]
+    return df[[column_name]]
 
 def create_new_sheet(new_sheet_name):
     service.spreadsheets().batchUpdate(

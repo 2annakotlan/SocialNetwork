@@ -28,7 +28,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
     st.write(existing_emails)
     email = st.text_input("Email:")
     #domain = email.split('@')[1]
-    domain = "yahoo.com"
+    #domain = "yahoo.com"
     
     if st.button("Enter"):
         if email in existing_emails.values: # existing email --> logging in
@@ -36,7 +36,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.success("Logging In")
             time.sleep(3)  
         else: # not existing email --> signing up
-            update_sheet_value('Admin', 4, 'B', 'Hello World')
+            update_sheet_value('Admin', 4, 'B', email)
 
             #create_new_sheet(email)
             st.session_state.page = signup_target_page  

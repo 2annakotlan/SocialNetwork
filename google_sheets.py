@@ -20,11 +20,12 @@ def create_new_sheet(new_sheet_name):
         spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
         body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
 
-def update_sheet_value(sheet_name, row, column, value):
+def update_cell_value(sheet_name, cell, value):
+    range_name = f"{sheet_name}!{cell}"
     service.spreadsheets().values().update(
-        spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
-        range=f"{sheet_name}!{column}{row}",
-        valueInputOption='RAW',
+        spreadsheetId=1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro,
+        range=range_name,
+        valueInputOption="RAW",
         body={'values': [[value]]}
     ).execute()
     

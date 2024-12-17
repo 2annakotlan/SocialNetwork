@@ -22,7 +22,7 @@ def create_new_sheet(new_sheet_name):
 
 def append_values(input_data, sheet_name, column_name):
     headers = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!1:1').execute().get('values', [])[0]
-    col = chr(65 + headers.index(column_name) + 1) 
+    col = chr(65 + headers.index(column_name)) 
     st.write(col)
     service.spreadsheets().values().append(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!{col}:{col}', valueInputOption="RAW", body={'values': [[input_data]]}).execute()
 

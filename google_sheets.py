@@ -22,12 +22,17 @@ def create_new_sheet(new_sheet_name):
 
 def update_cell_value(sheet_name, cell, value):
     range_name = f"{sheet_name}!{cell}"
-    service.spreadsheets().values().update(
-        spreadsheetId=1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro,
-        range=range_name,
-        valueInputOption="RAW",
-        body={'values': [[value]]}
-    ).execute()
+    try:
+        response = service.spreadsheets().values().update(
+            spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',  # Fixed the missing quotation mark
+            range=range_name,
+            valueInputOption="USER_ENTERED",  # Use USER_ENTERED for better input handling
+            body={'values': [[value]]}
+        ).execute()
+        st.write("Update successful")
+    except Exception as e:
+        st.write(f"Error updating cell: {e}")
+
     
 '''
 def append_values(input_data, sheet_name, column_name):

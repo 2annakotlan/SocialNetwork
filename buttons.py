@@ -38,7 +38,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
         else: # not existing email --> signing up
             append_values(email, "Admin", "email")
             append_values(domain, "Admin", "domain")
-            create_new_sheet(email)
+            #create_new_sheet(email)
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
             time.sleep(3)  

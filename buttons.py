@@ -24,7 +24,7 @@ def display_student_email_button(login_target_page, signup_target_page):
             st.error("Your organization has not created an account with us.")
 
 def display_admin_email_button(login_target_page, signup_target_page):
-    existing_emails = get_sheet_column_data("Admin", "domain", "2")
+    existing_emails = get_sheet_column_data("Admin", "domain", 2)
     st.write(existing_emails)
     email = st.text_input("Email:")
     #domain = email.split('@')[1]

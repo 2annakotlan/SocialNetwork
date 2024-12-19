@@ -34,7 +34,6 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.success("Logging In")
             time.sleep(3)  
         else: # not existing email --> signing up
-            edit_cell(sheet_name="Admin", column_name="domain", row_name="admin@gmail.com", value="test")
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
             time.sleep(3)  

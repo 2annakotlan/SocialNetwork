@@ -20,18 +20,30 @@ def get_sheet_column_data(sheet_name, column_name):
 def create_new_sheet(new_sheet_name):
     service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
 
-def edit_cell(sheet_name, column_name, row_name, value):
+def edit_cell(sheet_name, column_name, row_name, new_value):
+    # Get the list of column names in the first row
     column_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get("values", [[]])[0]
+    
+    # Find the index of the specified column
     column_index = chr(65 + column_names.index(column_name))
-
+    
+    # Get the list of row names in the first column
+    row_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A:A").execute().get("values", [[]])
+    
+    # If row_name is "append", find the next empty row
     if row_name == "append":
-        row_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_name}:{column_name}").execute().get("values", [[]])
-        row_index = len(row_names) + 1  
+        row_index = len(row_names) + 1  # Find the next empty row by using the length of the existing rows
     else:
-        row_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A:A").execute().get("values", [[]])
+        # Otherwise, find the index of the specified row name
         row_index = [row[0] for row in row_names].index(row_name) + 1
-
-    service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}{row_index}", valueInputOption="RAW", body={"values": [[new_value]]}).execute()
+    
+    # Update the value in the specified cell
+    service.spreadsheets().values().update(
+        spreadsheetId=spreadsheetId,
+        range=f"{sheet_name}!{column_index}{row_index}",
+        valueInputOption="RAW",
+        body={"values": [[new_value]]}
+    ).execute()
 
 '''
 def edit_cell(sheet_name, column_name, row_name, new_value):

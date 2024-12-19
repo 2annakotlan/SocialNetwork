@@ -32,7 +32,7 @@ def append_cell(sheet_name, column_name, new_value):
     column_index = chr(65 + column_names.index(column_name))
     values = [[new_value]]
     service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}1", valueInputOption="RAW", body={"values": values}).execute()
-
+    
 '''
 def edit_cell(sheet_name, cell_range, new_value):
     full_range = f"{sheet_name}!{cell_range}"

@@ -25,7 +25,7 @@ def display_student_email_button(login_target_page, signup_target_page):
 
 def display_admin_email_button(login_target_page, signup_target_page):
     #existing_emails = get_sheet_column_data("Admin", "domain")
-    st.write(existing_emails)
+    #st.write(existing_emails)
     email = st.text_input("Email:")
     
     if st.button("Enter"):

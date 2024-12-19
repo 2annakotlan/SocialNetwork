@@ -28,7 +28,8 @@ def edit_cell(sheet_name, column_name, row_name, value):
     column_names = column_names_result[0] if column_names_result else []
 
     if column_name not in column_names:
-        raise ValueError(f"Column '{column_name}' not found in sheet '{sheet_name}'.")
+        st.error(f"Column '{column_name}' not found in sheet '{sheet_name}'.")
+        return
 
     column_index = chr(65 + column_names.index(column_name))  # Convert to Excel-style column letter
     
@@ -39,17 +40,23 @@ def edit_cell(sheet_name, column_name, row_name, value):
     row_names = [row[0] for row in row_names_result if row]  # Ensure non-empty rows
     
     if row_name not in row_names:
-        raise ValueError(f"Row '{row_name}' not found in sheet '{sheet_name}'.")
+        st.error(f"Row '{row_name}' not found in sheet '{sheet_name}'.")
+        return
 
     row_index = row_names.index(row_name) + 1  # Rows are 1-indexed in Sheets
     
     # Update the cell
-    service.spreadsheets().values().update(
-        spreadsheetId=spreadsheetId,
-        range=f"{sheet_name}!{column_index}{row_index}",
-        valueInputOption="RAW",
-        body={"values": [[value]]}
-    ).execute()
+    try:
+        service.spreadsheets().values().update(
+            spreadsheetId=spreadsheetId,
+            range=f"{sheet_name}!{column_index}{row_index}",
+            valueInputOption="RAW",
+            body={"values": [[value]]}
+        ).execute()
+        st.success(f"Successfully updated '{sheet_name}' at {column_index}{row_index}.")
+    except Exception as e:
+        st.error(f"An error occurred while updating the cell: {e}")
+
 
 '''
 def edit_cell(sheet_name, column_name, row_name, value):

@@ -3,6 +3,8 @@ import pandas as pd
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 
+spreadsheetId = '1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro'
+
 def get_sheets_service():
     credentials = Credentials.from_service_account_info(st.secrets["google_service_account"], scopes=['https://www.googleapis.com/auth/spreadsheets'])
     return build('sheets', 'v4', credentials=credentials)
@@ -10,36 +12,20 @@ def get_sheets_service():
 service = get_sheets_service()
 
 def get_sheet_column_data(sheet_name, column_name):
-    result = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=sheet_name).execute()
+    result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()
     data = result.get('values', []) 
     df = pd.DataFrame(data[1:], columns=data[0])
     return df[[column_name]]
 
 def create_new_sheet(new_sheet_name):
-    service.spreadsheets().batchUpdate(
-        spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
-        body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
+    service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
 
-def edit_cell_by_header(sheet_name, header_name, row_number, new_value):
-    # Fetch the header row to find the column index
-    headers = service.spreadsheets().values().get(
-        spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
-        range=f"{sheet_name}!1:1"
-    ).execute().get("values", [[]])[0]
-    
-    if header_name not in headers:
-        raise ValueError(f"Header '{header_name}' not found in sheet '{sheet_name}'.")
-    
-    column_letter = chr(64 + headers.index(header_name) + 1)  # Convert to column letter
-    cell_range = f"{column_letter}{row_number}"
-    
-    # Update the cell
-    service.spreadsheets().values().update(
-        spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
-        range=f"{sheet_name}!{cell_range}",
-        valueInputOption="RAW",
-        body={"values": [[new_value]]}
-    ).execute()
+def edit_cell(sheet_name, column_name, row_name, new_value):
+    column_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get("values", [[]])[0]
+    column_index = chr(65 + column_names.index(column_name))
+    row_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A:A").execute().get("values", [[]])
+    row_index = [row[0] for row in row_names].index(row_name) + 1  
+    service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}{row_index}", valueInputOption="RAW", body={"values": [[new_value]]}).execute()
 
 '''
 def edit_cell(sheet_name, cell_range, new_value):

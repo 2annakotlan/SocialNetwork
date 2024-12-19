@@ -35,12 +35,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.success("Logging In")
             time.sleep(3)  
         else: # not existing email --> signing up
-            @append_cell("Admin", "domain", email)
-
-            edit_cell("Admin", "C4", "New Value")
-            #edit_cell(sheet_name="Admin", column_name="email", row_name="append", new_value=email)
-            #edit_cell("Admin", "email", "append", email)
-            #edit_cell("Admin", "domain", email, domain)
+            edit_cell("Admin", "domain", "admin@gmail.com", "New Value")
 
             # create_new_sheet(email)
             st.session_state.page = signup_target_page  

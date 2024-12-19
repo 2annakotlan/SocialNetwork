@@ -20,20 +20,15 @@ def create_new_sheet(new_sheet_name):
         spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
         body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
 
-def update_cell_value(sheet_name, cell, value):
-    range_name = f"{sheet_name}!{cell}"
-    try:
-        response = service.spreadsheets().values().update(
-            spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',  # Fixed the missing quotation mark
-            range=range_name,
-            valueInputOption="USER_ENTERED",  # Use USER_ENTERED for better input handling
-            body={'values': [[value]]}
-        ).execute()
-        st.write("Update successful")
-    except Exception as e:
-        st.write(f"Error updating cell: {e}")
+def edit_cell(sheet_name, cell_range, new_value):
+    full_range = f"{sheet_name}!{cell_range}"
+    service.spreadsheets().values().update(
+        spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
+        range=full_range,
+        valueInputOption="RAW",
+        body={"values": [[new_value]]}
+    ).execute()
 
-    
 '''
 def append_values(input_data, sheet_name, column_name):
     headers = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!1:1').execute().get('values', [])[0]

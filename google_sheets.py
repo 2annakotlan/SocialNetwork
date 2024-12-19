@@ -20,6 +20,28 @@ def create_new_sheet(new_sheet_name):
         spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
         body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
 
+def edit_cell_by_header(sheet_name, header_name, row_number, new_value):
+    # Fetch the header row to find the column index
+    headers = service.spreadsheets().values().get(
+        spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
+        range=f"{sheet_name}!1:1"
+    ).execute().get("values", [[]])[0]
+    
+    if header_name not in headers:
+        raise ValueError(f"Header '{header_name}' not found in sheet '{sheet_name}'.")
+    
+    column_letter = chr(64 + headers.index(header_name) + 1)  # Convert to column letter
+    cell_range = f"{column_letter}{row_number}"
+    
+    # Update the cell
+    service.spreadsheets().values().update(
+        spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro',
+        range=f"{sheet_name}!{cell_range}",
+        valueInputOption="RAW",
+        body={"values": [[new_value]]}
+    ).execute()
+
+'''
 def edit_cell(sheet_name, cell_range, new_value):
     full_range = f"{sheet_name}!{cell_range}"
     service.spreadsheets().values().update(
@@ -29,7 +51,7 @@ def edit_cell(sheet_name, cell_range, new_value):
         body={"values": [[new_value]]}
     ).execute()
 
-'''
+
 def append_values(input_data, sheet_name, column_name):
     headers = service.spreadsheets().values().get(spreadsheetId='1g_upGl2tligN2G7OjVDDIIjVXuhFCupkJME4vPDL7ro', range=f'{sheet_name}!1:1').execute().get('values', [])[0]
     col_letter = chr(65 + headers.index(column_name))  # Convert column index to letter

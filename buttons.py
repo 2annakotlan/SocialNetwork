@@ -24,7 +24,7 @@ def display_student_email_button(login_target_page, signup_target_page):
             st.error("Your organization has not created an account with us.")
 
 def display_admin_email_button(login_target_page, signup_target_page):
-    existing_emails = get_sheet_column_data("Admin", "email")
+    existing_emails = get_sheet_column_data("admin", "email")
     st.write(existing_emails)
     email = st.text_input("Email:")
     
@@ -34,7 +34,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.success("Logging In")
             time.sleep(3)  
         else: # not existing email --> signing up
-            edit_cell("Admin", "domain", "admin@harvard.edu", "harvard.edu")
+            edit_cell("admin", "domain", "admin@harvard.edu", "harvard.edu")
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
             time.sleep(3)  

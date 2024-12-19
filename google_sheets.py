@@ -27,6 +27,12 @@ def edit_cell(sheet_name, column_name, row_name, new_value):
     row_index = [row[0] for row in row_names].index(row_name) + 1  
     service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}{row_index}", valueInputOption="RAW", body={"values": [[new_value]]}).execute()
 
+def append_cell(sheet_name, column_name, new_value):
+    column_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get("values", [[]])[0]
+    column_index = chr(65 + column_names.index(column_name))
+    values = [[new_value]]
+    service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}1", valueInputOption="RAW", body={"values": values}).execute()
+
 '''
 def edit_cell(sheet_name, cell_range, new_value):
     full_range = f"{sheet_name}!{cell_range}"

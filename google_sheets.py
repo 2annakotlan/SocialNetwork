@@ -21,51 +21,13 @@ def create_new_sheet(new_sheet_name):
     service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
 
 def edit_cell(sheet_name, column_name, row_name, value):
-    # Fetch column headers
-    column_names_result = service.spreadsheets().values().get(
-        spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1"
-    ).execute().get("values", [[]])
-    column_names = column_names_result[0] if column_names_result else []
-
-    if column_name not in column_names:
-        st.error(f"Column '{column_name}' not found in sheet '{sheet_name}'.")
-        return
-
-    column_index = chr(65 + column_names.index(column_name))  # Convert to Excel-style column letter
-    
-    # Fetch row data
-    row_names_result = service.spreadsheets().values().get(
-        spreadsheetId=spreadsheetId, range=f"{sheet_name}!A:A"
-    ).execute().get("values", [[]])
-    row_names = [row[0] for row in row_names_result if row]  # Ensure non-empty rows
-    
-    if row_name not in row_names:
-        st.error(f"Row '{row_name}' not found in sheet '{sheet_name}'.")
-        return
-
-    row_index = row_names.index(row_name) + 1  # Rows are 1-indexed in Sheets
-    
-    # Update the cell
-    try:
-        service.spreadsheets().values().update(
-            spreadsheetId=spreadsheetId,
-            range=f"{sheet_name}!{column_index}{row_index}",
-            valueInputOption="RAW",
-            body={"values": [[value]]}
-        ).execute()
-        st.success(f"Successfully updated '{sheet_name}' at {column_index}{row_index}.")
-    except Exception as e:
-        st.error(f"An error occurred while updating the cell: {e}")
-
-
-'''
-def edit_cell(sheet_name, column_name, row_name, value):
     column_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get("values", [[]])[0]
     column_index = chr(65 + column_names.index(column_name))
     row_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A:A").execute().get("values", [[]])
     row_index = [row[0] for row in row_names].index(row_name) + 1  
     service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}{row_index}", valueInputOption="RAW", body={"values": [[value]]}).execute()
 
+'''
 def edit_cell(sheet_name, cell_range, new_value):
     full_range = f"{sheet_name}!{cell_range}"
     service.spreadsheets().values().update(

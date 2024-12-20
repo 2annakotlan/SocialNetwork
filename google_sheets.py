@@ -34,14 +34,6 @@ def append_cell(sheet_name, column_name, value):
     last_filled_row = len(row_names) 
     row_index = last_filled_row + 1
     service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}{row_index}", valueInputOption="RAW", body={"values": [[value]]}).execute()
-    
-def append_cell(sheet_name, column_name, value):
-    column_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get("values", [[]])[0]
-    column_index = chr(65 + column_names.index(column_name))  # Calculate the column index (e.g., A, B, C, etc.)
-    row_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A:A").execute().get("values", [[]])
-    last_filled_row = len(row_names)  # Last row with data
-    row_index = last_filled_row + 1
-    service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}{row_index}", valueInputOption="RAW", body={"values": [[value]]}).execute()
 
 
 '''

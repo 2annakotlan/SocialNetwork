@@ -24,10 +24,7 @@ def edit_cell(sheet_name, column_name, row_name, value):
     column_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get("values", [[]])[0]
     column_index = chr(65 + column_names.index(column_name))
     row_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A:A").execute().get("values", [[]])
-    if row_name == "append":
-        row_index = len(row_names) + 1
-    else:
-        row_index = [row[0] for row in row_names].index(row_name) + 1 
+    row_index = len(row_names) + 1 if row_name == "append" else [row[0] for row in row_names].index(row_name) + 1
     service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}{row_index}", valueInputOption="RAW", body={"values": [[value]]}).execute()
 
 def edit_normal_cell(sheet_name, column_name, row_name, value):

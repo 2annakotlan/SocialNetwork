@@ -38,7 +38,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
             time.sleep(3)  
-            edit_cell("admin", "domain", email, "test.edu")
+            #edit_cell("admin", "domain", email, "test.edu")
 
     
                           

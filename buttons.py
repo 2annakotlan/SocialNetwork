@@ -37,6 +37,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
             domain = email.split('@')[1]
             edit_cell("admin", "email", "append", email)
             edit_cell("admin", "domain", email, domain)
+            create_new_sheet(domain)
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
             time.sleep(3)  

@@ -28,6 +28,9 @@ def display_admin_email_button(login_target_page, signup_target_page):
     st.write(existing_emails)
     email = st.text_input("Email:")
     
+    existing_headers = get_header(domain)
+    st.write(existing_headers)
+    
     if st.button("Enter"):   
         st.session_state.admin_email = email     
         if email in existing_emails.values: # existing email --> logging in

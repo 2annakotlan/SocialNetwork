@@ -47,6 +47,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
            
 def display_admin_profile_button():
     email = st.session_state.admin_email
+    domain = email.split('@')[1]
     st.write(email)
     existing_headers = get_header(domain)
     st.write(existing_headers)

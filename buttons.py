@@ -29,7 +29,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
     
     if st.button("Enter"):   
-        st.session_state.email = email     
+        st.session_state.admin_email = email     
         if email in existing_emails.values: # existing email --> logging in
             st.session_state.page = login_target_page
             st.success("Logging In")
@@ -46,6 +46,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.success("Signing Up")
            
 def display_admin_profile_button():
-    email = st.session_state.email
+    email = st.session_state.admin_email
+    st.write(email)
     #existing_headers = get_header(domain)
     #st.write(existing_headers)

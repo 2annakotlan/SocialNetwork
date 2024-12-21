@@ -25,6 +25,8 @@ def display_student_email_button(login_target_page, signup_target_page):
 
 def display_admin_email_button(login_target_page, signup_target_page):
     existing_emails = get_sheet_column_data("admin", "email")
+    hi = get_data("admin", None, "email")
+    st.write(hi)
     st.write(existing_emails)
     email = st.text_input("Email:")
     
@@ -39,16 +41,15 @@ def display_admin_email_button(login_target_page, signup_target_page):
             edit_cell("admin", "domain", email, domain)
             create_new_sheet(domain)
             edit_header(domain, "name")
-            time.sleep(1)
             edit_header(domain, "friends")
-            time.sleep(1)
             edit_header(domain, "activities") 
-            time.sleep(1)
             edit_header(domain, "interests") 
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
             time.sleep(3)  
-            
+
+display_admin_profile_button()
+    existing_headers = get_sheet_column_data(domain, "email")
 
 
                           

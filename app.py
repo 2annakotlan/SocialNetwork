@@ -18,6 +18,7 @@ def display_admin_start_page():
 
 def display_student_profile_page():
     st.write("Student Profile Page")
+    display_admin_profile_button()
     display_button("Save Changes", "student_landing_page")
     display_button("Log out", "landing_page")
 

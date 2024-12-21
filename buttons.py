@@ -49,8 +49,8 @@ def display_admin_email_button(login_target_page, signup_target_page):
             #edit_header(domain, "friends")
             #edit_header(domain, "activities") 
             #edit_header(domain, "interests") 
-            st.session_state.page = signup_target_page  
-            st.success("Signing Up")
+                st.session_state.page = signup_target_page  
+                st.success("Signing Up")
            
 #def display_admin_profile_button():
     #email = st.session_state.admin_email

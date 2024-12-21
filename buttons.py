@@ -52,7 +52,7 @@ def display_admin_profile_button():
     st.write("Column Headers:")
     for i, header in enumerate(existing_headers):
         # Display header with a button next to it
-        col1, col2 = st.columns([1, .1]) 
+        col1, col2 = st.columns([9, 1]) 
         with col1:
             st.write(f"- {header}")
         with col2:

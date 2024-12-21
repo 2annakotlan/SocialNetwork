@@ -43,11 +43,11 @@ def display_admin_email_button(login_target_page, signup_target_page):
             edit_cell("admin", "domain", email, domain)
             edit_cell("admin", "name", email, name)
             
-            create_new_sheet(name)
-            edit_header(domain, "name")
-            edit_header(domain, "friends")
-            edit_header(domain, "activities") 
-            edit_header(domain, "interests") 
+            #create_new_sheet(name)
+            #edit_header(domain, "name")
+            #edit_header(domain, "friends")
+            #edit_header(domain, "activities") 
+            #edit_header(domain, "interests") 
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
            

@@ -49,5 +49,7 @@ def display_admin_profile_button():
     email = st.session_state.admin_email
     domain = email.split('@')[1]
     existing_headers = get_header(domain)
-    st.write("Column Headers:", list(existing_headers))
+    st.write("Column Headers:")
+    for header in existing_headers:
+        st.write(f"- {header}")
 

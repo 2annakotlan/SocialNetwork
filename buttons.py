@@ -29,13 +29,12 @@ def display_admin_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
     
     if st.button("Enter"):   
-        domain = email.split('@')[1]
-        st.session_state.domain = domain
-        
+        st.session_state.email = email     
         if email in existing_emails.values: # existing email --> logging in
             st.session_state.page = login_target_page
             st.success("Logging In")
         else: # not existing email --> signing up
+            domain = email.split('@')[1]
             edit_cell("admin", "email", "append", email)
             edit_cell("admin", "domain", email, domain)
             create_new_sheet(domain)
@@ -47,10 +46,6 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.success("Signing Up")
            
 def display_admin_profile_button():
-    if "domain" not in st.session_state:  # Check if 'domain' exists in session state
-        st.error("Session expired or not initialized. Please log in or sign up again.")
-        return
-
-    domain = st.session_state.domain
-    existing_headers = get_header(domain)
-    st.write(existing_headers)
+    email = st.session_state.email
+    #existing_headers = get_header(domain)
+    #st.write(existing_headers)

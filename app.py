@@ -29,6 +29,7 @@ def display_admin_profile_page():
 
 def display_admin_landing_page():
     st.write("Admin Landing Page")
+    display_button("Edit Profile", "admin_profile_page")
     display_button("Log out", "landing_page")
 
 def display_student_landing_page():

@@ -52,8 +52,8 @@ def display_admin_profile_button():
     st.write("Column Headers:")
     for i, header in enumerate(existing_headers):
         # Display header with a button next to it
-        col1, col2 = st.columns([8, 1])  # Adjust column widths as needed
+        col1, col2 = st.columns([5, 5]) 
         with col1:
             st.write(f"- {header}")
         with col2:
-            st.button("✏️", key=f"edit_{i}")  # Unique key for each button
+            st.button("✏️", key=f"edit_{i}")  

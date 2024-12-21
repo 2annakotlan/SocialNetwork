@@ -49,7 +49,7 @@ def display_admin_profile_button():
     email = st.session_state.admin_email
     domain = email.split('@')[1]
     existing_headers = get_header(domain)
-    st.write("Column Headers:")
+    st.write("Data Collected:")
     for i, header in enumerate(existing_headers):
         col1, col2 = st.columns([.2, 1]) 
         with col1:

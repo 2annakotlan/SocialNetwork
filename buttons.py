@@ -51,5 +51,8 @@ def display_admin_profile_button():
     existing_headers = get_header(domain)
     st.write("Column Headers:")
     for i, header in enumerate(existing_headers):
-        st.write(f"- {header}", unsafe_allow_html=True)  # Text first
-        st.button("✏️", key=f"edit_{i}")  # Button immediately after
+        col1, col2 = st.columns([9, 0.5]) 
+        with col1:
+            st.write(f"- {header}")
+        with col2:
+            st.button("✏️", key=f"edit_{i}") 

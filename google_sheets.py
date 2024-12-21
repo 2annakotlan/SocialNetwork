@@ -11,13 +11,6 @@ def get_sheets_service():
 
 service = get_sheets_service()
 
-def get_column_data(sheet_name, column_name):
-    result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()
-    data = result.get('values', []) 
-    df = pd.DataFrame(data[1:], columns=data[0])
-    column_data = df[[column_name]] 
-    return column_data if not column_data.empty else None
-
 def get_data(sheet_name, row_name, column_name):
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()
     data = result.get('values', [])
@@ -29,6 +22,13 @@ def get_data(sheet_name, row_name, column_name):
     elif row_name is not None and column_name is not None:
         data = df[df.iloc[:, 0] == row_name][[column_name]]  # Filter by row and column
     return data 
+
+def get_header(sheet_name):
+    result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()
+    data = result.get('values', [])
+    df = pd.DataFrame(data[1:], columns=data[0])  
+    header = df.iloc[:, 0] 
+    return header
 
 def create_new_sheet(new_sheet_name):
     service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()

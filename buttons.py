@@ -52,5 +52,5 @@ def display_admin_profile_button():
         return
 
     domain = st.session_state.domain
-    existing_headers = get_headers(domain)
+    existing_headers = get_header(domain)
     st.write(existing_headers)

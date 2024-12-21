@@ -35,17 +35,17 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.success("Logging In")
         else: # not existing email --> signing up
             domain = email.split('@')[1]
+            edit_cell("admin", "email", "append", email)
+            edit_cell("admin", "domain", email, domain)
+            create_new_sheet(name)
+            edit_header(domain, "name")
+            edit_header(domain, "friends")
+            edit_header(domain, "activities") 
+            edit_header(domain, "interests") 
+            #st.session_state.page = signup_target_page  
+            st.success("Signing Up")
             existing_headers = get_header(domain)
             st.write(existing_headers)
-            #edit_cell("admin", "email", "append", email)
-            #edit_cell("admin", "domain", email, domain)
-            #create_new_sheet(name)
-            #edit_header(domain, "name")
-            #edit_header(domain, "friends")
-            #edit_header(domain, "activities") 
-            #edit_header(domain, "interests") 
-            #st.session_state.page = signup_target_page  
-            #st.success("Signing Up")
            
 def display_admin_profile_button():
     email = st.session_state.admin_email

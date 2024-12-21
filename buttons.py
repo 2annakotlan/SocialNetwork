@@ -38,10 +38,11 @@ def display_admin_email_button(login_target_page, signup_target_page):
             is_correct = st.checkbox(f"Is your institution called {guess}?")
             name = st.text_input("Please enter the correct institution name:" if not is_correct else guess)
             
-            domain = email.split('@')[1]
-            edit_cell("admin", "email", "append", email)
-            edit_cell("admin", "domain", email, domain)
-            edit_cell("admin", "name", email, name)
+            if name:
+                domain = email.split('@')[1]
+                edit_cell("admin", "email", "append", email)
+                edit_cell("admin", "domain", email, domain)
+                edit_cell("admin", "name", email, name)
             
             #create_new_sheet(name)
             #edit_header(domain, "name")

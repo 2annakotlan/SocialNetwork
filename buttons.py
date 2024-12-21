@@ -34,8 +34,8 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.session_state.page = login_target_page
             st.success("Logging In")
         else: # not existing email --> signing up
-            institution = email.split('@')[1].split('.')[1].capitalize()
-            st.write(f"Is your institution called {result}?")
+            institution_guess = email.split('@')[1].split('.')[1].capitalize()
+            st.write(f"Is your institution called {institution_guess}?")
             '''
 
             checkbox = st.checkbox("Yes")
@@ -44,7 +44,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
             else:
                 institution = st.text_input("Please enter the correct institution name:")
             '''
-            st.write(f"Selected institution: {institution}")
+            st.write(f"Selected institution: {institution_guess}")
             
             '''
             domain = email.split('@')[1]

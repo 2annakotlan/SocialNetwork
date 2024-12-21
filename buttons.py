@@ -46,6 +46,10 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.success("Signing Up")
            
 def display_admin_profile_button():
-    domain = st.session_state.domain 
+    if "domain" not in st.session_state:  # Check if 'domain' exists in session state
+        st.error("Session expired or not initialized. Please log in or sign up again.")
+        return
+
+    domain = st.session_state.domain
     existing_headers = get_headers(domain)
     st.write(existing_headers)

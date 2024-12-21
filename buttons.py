@@ -34,9 +34,21 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.session_state.page = login_target_page
             st.success("Logging In")
         else: # not existing email --> signing up
+            institution = email.split('@')[1].split('.')[1].capitalize()
+            st.write(f"Is your institution called {result}?")
+
+            checkbox = st.checkbox("Yes")
+            if checkbox:
+                institution = result  
+            else:
+                institution = st.text_input("Please enter the correct institution name:")
+            
+            st.write(f"Selected institution: {institution}")
+            '''
             domain = email.split('@')[1]
             edit_cell("admin", "email", "append", email)
             edit_cell("admin", "domain", email, domain)
+            edit_cell("admin", "institution", email, institution)
             create_new_sheet(domain)
             edit_header(domain, "name")
             edit_header(domain, "friends")
@@ -44,6 +56,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
             edit_header(domain, "interests") 
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
+            '''
      
 def display_admin_profile_button():
     email = st.session_state.admin_email

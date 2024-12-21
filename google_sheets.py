@@ -26,8 +26,8 @@ def get_data(sheet_name, row_name, column_name):
 def get_header(sheet_name):
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()
     data = result.get('values', [])
-    df = pd.DataFrame(data[1:], columns=data[0])  
-    header = df.iloc[:, 0] 
+    df = pd.DataFrame(data[1:], columns=data[0])  # First row is used as column names
+    header = df.columns  
     return header
 
 def create_new_sheet(new_sheet_name):

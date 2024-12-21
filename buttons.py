@@ -27,7 +27,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
     existing_emails = get_data("admin", None, "email")
     st.write(existing_emails)
     email = st.text_input("Email:")
-    
+    domain = email.split('@')[1]
     existing_headers = get_header(domain)
     st.write(existing_headers)
     

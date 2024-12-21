@@ -51,7 +51,7 @@ def display_admin_profile_button():
     existing_headers = get_header(domain)
     st.write("Column Headers:")
     for i, header in enumerate(existing_headers):
-        col1, col2 = st.columns([.01, 1]) 
+        col1, col2 = st.columns([.05, 1]) 
         with col1:
             st.write(f"- {header}")
         with col2:

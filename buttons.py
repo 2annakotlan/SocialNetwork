@@ -27,8 +27,6 @@ def display_admin_email_button(login_target_page, signup_target_page):
     existing_emails = get_data("admin", None, "email")
     st.write(existing_emails)
     email = st.text_input("Email:")
-    existing_headers = get_header("admin")
-    st.write(existing_headers)
     
     if st.button("Enter"):   
         st.session_state.admin_email = email     
@@ -46,11 +44,10 @@ def display_admin_email_button(login_target_page, signup_target_page):
             edit_header(domain, "interests") 
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
-
-           
+     
 def display_admin_profile_button():
     email = st.session_state.admin_email
     domain = email.split('@')[1]
-    st.write(domain)
     existing_headers = get_header(domain)
-    st.write(existing_headers)
+    st.write("Column Headers:", list(existing_headers))
+

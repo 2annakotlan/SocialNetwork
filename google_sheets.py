@@ -28,7 +28,7 @@ def get_data(sheet_name, row_name, column_name):
         data = df[df.iloc[:, 0] == row_name] 
     elif row_name is not None and column_name is not None:
         data = df[df.iloc[:, 0] == row_name][[column_name]]  # Filter by row and column
-    return data if not data.empty else None
+    return data 
 
 def create_new_sheet(new_sheet_name):
     service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()

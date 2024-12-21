@@ -46,10 +46,6 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.success("Signing Up")
             time.sleep(3)  
 
-#def display_admin_profile_button():
-    #existing_headers = get_headers(domain)
-    #st.write(existing_headers)
-
 
 
                           

@@ -32,7 +32,6 @@ def display_admin_email_button(login_target_page, signup_target_page):
         if email in existing_emails.values: # existing email --> logging in
             st.session_state.page = login_target_page
             st.success("Logging In")
-            time.sleep(3)  
         else: # not existing email --> signing up
             domain = email.split('@')[1]
             edit_cell("admin", "email", "append", email)
@@ -44,7 +43,8 @@ def display_admin_email_button(login_target_page, signup_target_page):
             edit_header(domain, "interests") 
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
-            time.sleep(3)  
+            return domain
+
 
 
 

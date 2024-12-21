@@ -22,13 +22,13 @@ def display_student_email_button(login_target_page, signup_target_page):
             time.sleep(3)  
         elif not email.endswith(existing_domain): # not existing domain --> error message
             st.error("Your organization has not created an account with us.")
-
-def display_admin_email_button(login_target_page, signup_target_page):
+    
+def get_admin_email_button(login_target_page, signup_target_page):
     existing_emails = get_data("admin", None, "email")
     st.write(existing_emails)
     email = st.text_input("Email:")
     
-    if st.button("Enter"):
+    if st.button("Enter"):    
         if email in existing_emails.values: # existing email --> logging in
             st.session_state.page = login_target_page
             st.success("Logging In")
@@ -45,6 +45,12 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
             time.sleep(3)  
+            return domain
+
+
+
+
+            
 
 
 

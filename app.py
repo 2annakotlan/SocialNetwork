@@ -22,16 +22,12 @@ def display_student_profile_page():
     display_button("Log out", "landing_page")
 
 def display_admin_profile_page():
-    domain = st.session_state.domain
-    st.write(f"{domain}'s Profile Page")
     st.write("Admin Profile Page")
     display_admin_profile_button()
     display_button("Save Changes", "admin_landing_page")
     display_button("Log out", "landing_page")
 
 def display_admin_landing_page():
-    domain = st.session_state.domain
-    st.write(f"{domain}'s Landing Page")
     st.write("Admin Landing Page")
     display_button("Edit Profile", "admin_profile_page")
     display_button("Log out", "landing_page")

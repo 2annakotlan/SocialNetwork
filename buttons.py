@@ -50,6 +50,10 @@ def display_admin_profile_button():
     domain = email.split('@')[1]
     existing_headers = get_header(domain)
     st.write("Column Headers:")
-    for header in existing_headers:
-        st.write(f"- {header}")
-
+    for i, header in enumerate(existing_headers):
+        # Display header with a button next to it
+        col1, col2 = st.columns([8, 1])  # Adjust column widths as needed
+        with col1:
+            st.write(f"- {header}")
+        with col2:
+            st.button("✏️", key=f"edit_{i}")  # Unique key for each button

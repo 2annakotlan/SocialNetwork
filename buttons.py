@@ -27,17 +27,19 @@ def display_admin_email_button(login_target_page, signup_target_page):
     existing_emails = get_data("admin", None, "email")
     st.write(existing_emails)
     email = st.text_input("Email:")
+    domain = email.split('@')[1]
     institution_guess = email.split('@')[1].split('.')[-2].capitalize() if email and '@' in email and '.' in email.split('@')[1] else None
     institution = st.text_input("Institution:", value=institution_guess) if email and email not in existing_emails.values else None
     
     if st.button("Enter"):   
-        st.session_state.admin_email = email    
+        st.session_state.admin_email = email  
+        st.session_state.admin_domain = domain
         st.session_state.admin_institution = institution  
+        
         if email in existing_emails.values: # existing email --> logging in
             st.session_state.page = login_target_page
             st.success("Logging In")
         else: # not existing email --> signing up
-            domain = email.split('@')[1]
             edit_cell("admin", "email", "append", email)
             edit_cell("admin", "domain", email, domain)
             edit_cell("admin", "institution", email, institution)
@@ -51,7 +53,8 @@ def display_admin_email_button(login_target_page, signup_target_page):
 
 def display_admin_profile_button():
     email = st.session_state.admin_email
-    domain = email.split('@')[1]
+    domain = st.session_state.admin_domain
+    institution = st.session_state.admin_institution
     existing_headers = get_header(domain)
     st.write("Data Collected:")
     for i, header in enumerate(existing_headers):

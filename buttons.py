@@ -27,7 +27,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
     existing_emails = get_data("admin", None, "email")
     st.write(existing_emails)
     email = st.text_input("Email:")
-    institution = st.text_input("Institution:") if email not in existing_emails.values else None
+    institution = st.text_input("Institution:") if email not in existing_emails.values and email != "" else None
     
     if st.button("Enter"):   
         st.session_state.admin_email = email    

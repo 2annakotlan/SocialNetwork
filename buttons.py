@@ -55,7 +55,7 @@ def display_admin_profile_button():
     email = st.session_state.admin_email
     domain = st.session_state.admin_domain
     institution = st.session_state.admin_institution
-    existing_headers = get_header(domain)
+    existing_headers = get_header(institution)
     st.write("Data Collected:")
     for i, header in enumerate(existing_headers):
         col1, col2 = st.columns([.2, 1]) 

@@ -63,8 +63,12 @@ def display_admin_profile_button():
         with col1:
             st.write(f"- {header}")
         with col2:
-            button_clicked = st.button("x", key=f"edit_{i}")
-            if button_clicked:
+            delete = st.button("x", key=f"edit_{i}")
+            if delete:
                 delete_column(institution, header)
                 st.success("deleting column")
+    new_column = st.text_input("New Column:") 
+    add = st.button("+")
+    if add:
+        edit_header(institution, new_column):
     

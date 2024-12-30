@@ -28,7 +28,7 @@ def display_admin_start_page():
 
 def display_admin_profile_page():
     email = st.session_state.admin_email
-    institution = get_data("admin", email, "institution").values
+    institution = get_data("admin", email, "institution").to_string(index=False)
     st.write(f"{institution} Administration Profile Page")
     display_admin_profile_button()
     display_button("Save Changes", "admin_landing_page")

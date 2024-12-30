@@ -46,10 +46,9 @@ def edit_header(sheet_name, value):
     service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}1", valueInputOption="RAW", body={"values": [[value]]}).execute()
 
 def delete_column(sheet_name, column_name):
-    column_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get('values', [[]])[0]
-    column_index = column_names.index(column_name)
-    requests = [{"deleteDimension": {"range": {"sheetId": service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()['sheets'][0]['properties']['sheetId'], "dimension": "COLUMNS", "startIndex": column_index, "endIndex": column_index + 1}}}]
-    service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': requests}).execute()
+    column_index = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get('values', [[]])[0].index(column_name)
+    sheet_id = next(sheet['properties']['sheetId'] for sheet in service.spreadsheets().get(spreadsheetId=spreadsheetId).execute()['sheets'] if sheet['properties']['title'] == sheet_name)
+    service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"deleteDimension": {"range": {"sheetId": sheet_id, "dimension": "COLUMNS", "startIndex": column_index, "endIndex": column_index + 1}}}]}).execute()
 
 
 

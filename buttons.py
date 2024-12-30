@@ -70,5 +70,5 @@ def display_admin_profile_button():
     new_column = st.text_input("New Column:") 
     add = st.button("+")
     if add:
-        edit_header(institution, new_column):
+        edit_header(institution, new_column)
     

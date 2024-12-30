@@ -26,10 +26,6 @@ def display_admin_start_page():
     display_admin_email_button("admin_landing_page", "admin_profile_page")
     display_button("Back", "landing_page")
 
-def display_admin_institution_page():
-    st.write("Admin Institution Page")
-    display_admin_institution_button()
-
 def display_admin_profile_page():
     st.write("Admin Profile Page")
     display_admin_profile_button()

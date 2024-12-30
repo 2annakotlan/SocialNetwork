@@ -27,7 +27,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
     existing_emails = get_data("admin", None, "email")
     st.write(existing_emails)
     email = st.text_input("Email:")
-    domain = email.split('@')[1]
+    domain = email.split('@')[1] if email and '@' in email and '.' in email.split('@')[1] else None
     institution_guess = email.split('@')[1].split('.')[-2].capitalize() if email and '@' in email and '.' in email.split('@')[1] else None
     institution = st.text_input("Institution:", value=institution_guess) if email and email not in existing_emails.values else None
     

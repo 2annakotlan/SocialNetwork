@@ -25,6 +25,7 @@ def display_student_email_button(login_target_page, signup_target_page):
     
 def display_admin_email_button(login_target_page, signup_target_page):
     existing_emails = get_data("admin", None, "email")
+    existing_institutions = get_data("admin", None, "institution")
     st.write(existing_emails)
     email = st.text_input("Email:")
     domain = email.split('@')[1] if email and '@' in email and '.' in email.split('@')[1] else None
@@ -39,6 +40,8 @@ def display_admin_email_button(login_target_page, signup_target_page):
         if email in existing_emails.values: # existing email --> logging in
             st.session_state.page = login_target_page
             st.success("Logging In")
+        elif institution in existing_institutions.values: # wrong institution
+            st.error("this institution is already associated with a different email")
         else: # not existing email --> signing up
             edit_cell("admin", "email", "append", email)
             edit_cell("admin", "domain", email, domain)

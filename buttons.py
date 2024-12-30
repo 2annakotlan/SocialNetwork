@@ -52,6 +52,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.success("Signing Up")
 
 def display_admin_profile_button():
+    email = st.session_state.admin_email
     institution = get_data("admin", email, "institution")
     existing_headers = get_header(institution)
     st.write("Data Collected:")

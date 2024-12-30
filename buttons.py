@@ -55,8 +55,6 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.success("Signing Up")
 
 def display_admin_profile_button():
-    email = st.session_state.admin_email
-    domain = st.session_state.admin_domain
     institution = st.session_state.admin_institution
     existing_headers = get_header(institution)
     st.write("Data Collected:")
@@ -65,4 +63,8 @@ def display_admin_profile_button():
         with col1:
             st.write(f"- {header}")
         with col2:
-            st.button("✏️", key=f"edit_{i}") 
+            button_clicked = st.button("x", key=f"edit_{i}")
+            if button_clicked:
+                delete_column(institution, header)
+                st.success("deleting column")
+    

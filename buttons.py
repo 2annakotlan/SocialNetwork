@@ -34,16 +34,9 @@ def display_admin_email_button(login_target_page, signup_target_page):
     
     if st.button("Enter"):   
         st.session_state.admin_email = email  
-        st.session_state.admin_domain = domain
-        st.session_state.admin_institution = institution  
-        
         if email in existing_emails.values: # existing email --> logging in
-            domain = get_data("admin", email, "domain")
-            institution = get_data("admin", email, "institution")
-            st.write(domain)
-            st.write(institution)
-            #st.session_state.page = login_target_page
-            #st.success("Logging In")
+            st.session_state.page = login_target_page
+            st.success("Logging In")
         elif institution in existing_institutions.values: # wrong institution
             st.error("this institution is already associated with a different email")
         else: # not existing email --> signing up
@@ -59,7 +52,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
             st.success("Signing Up")
 
 def display_admin_profile_button():
-    institution = st.session_state.admin_institution
+    institution = get_data("admin", email, "institution")
     existing_headers = get_header(institution)
     st.write("Data Collected:")
     for i, header in enumerate(existing_headers):

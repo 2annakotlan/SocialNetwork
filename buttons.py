@@ -38,8 +38,8 @@ def display_admin_email_button(login_target_page, signup_target_page):
         st.session_state.admin_institution = institution  
         
         if email in existing_emails.values: # existing email --> logging in
-            domain = get_data(admin, email, domain)
-            institution = get_data(sheet_name, email, institution)
+            domain = get_data("admin", email, "domain")
+            institution = get_data("admin", email, "institution")
             st.session_state.page = login_target_page
             st.success("Logging In")
         elif institution in existing_institutions.values: # wrong institution

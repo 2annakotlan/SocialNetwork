@@ -20,13 +20,13 @@ def get_data(sheet_name, row_name, column_name):
     elif column_name is None and row_name is not None:
         data = df[df.iloc[:, 0] == row_name] 
     elif row_name is not None and column_name is not None:
-        data = df[df.iloc[:, 0] == row_name][[column_name]]  # Filter by row and column
+        data = df[df.iloc[:, 0] == row_name][[column_name]] 
     return data 
 
 def get_header(sheet_name):
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()
     data = result.get('values', [])
-    df = pd.DataFrame(data[1:], columns=data[0])  # First row is used as column names
+    df = pd.DataFrame(data[1:], columns=data[0])  
     header = df.columns  
     return header
 

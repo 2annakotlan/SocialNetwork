@@ -40,15 +40,14 @@ def display_admin_email_button(login_target_page, signup_target_page):
             edit_cell("admin", "email", "append", email)
             edit_cell("admin", "domain", email, domain)
             edit_cell("admin", "institution", email, institution)
-            #create_new_sheet(domain)
-            #edit_header(domain, "name")
-            #edit_header(domain, "friends")
-            #edit_header(domain, "activities") 
-            #edit_header(domain, "interests") 
-            #st.session_state.page = signup_target_page  
-            #st.success("Signing Up")
+            create_new_sheet(institution)
+            edit_header(institution, "name")
+            edit_header(institution, "friends")
+            edit_header(institution, "activities") 
+            edit_header(institution, "interests") 
+            st.session_state.page = signup_target_page  
+            st.success("Signing Up")
 
-     
 def display_admin_profile_button():
     email = st.session_state.admin_email
     domain = email.split('@')[1]

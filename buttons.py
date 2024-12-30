@@ -53,9 +53,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
 
 def display_admin_profile_button():
     email = st.session_state.admin_email
-    institution = get_data("admin", email, "institution").values
-    st.write(institution)
-    '''
+    institution = get_data("admin", email, "institution").to_csv(index=False, header=False)
     existing_headers = get_header(institution)
     st.write("Data Collected:")
     for i, header in enumerate(existing_headers):
@@ -71,5 +69,5 @@ def display_admin_profile_button():
     add = st.button("+")
     if add:
         edit_header(institution, new_column)
-    '''
+ 
     

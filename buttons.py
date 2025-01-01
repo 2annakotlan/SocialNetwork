@@ -68,12 +68,12 @@ def display_admin_profile_button():
             st.experimental_rerun()
             st.success("deleting column")
             
-    col3, col4 = st.columns([3, 1])  
+    # Layout for text input and button
+    col3, col4 = st.columns([3, 1])  # Adjust proportions
     with col3:
         new_column = st.text_input("New Column:")
     with col4:
-        st.text("")  # Add an empty text widget for spacing
-        add = st.button("Add")
+        add = st.button("Add", use_container_width=True)  # Ensures the button fills its column width
 
     if add:
         edit_header(institution, new_column)

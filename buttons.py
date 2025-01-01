@@ -88,12 +88,11 @@ def display_admin_profile_button():
                 st.success("Column deleted")
                 st.experimental_rerun()
 
-    # Layout for text input and button with proper vertical alignment
     col3, col4 = st.columns([3, 1])
     with col3:
-        new_column = st.text_input("New Column:")
+        new_column = st.text_input("", key="new_column_input")  # No label here
     with col4:
-        st.write("")  # Adds padding to align the button with the center of the text_input
+        st.write("")  # Padding to align the button
         add = st.button("Add")
 
     if add:

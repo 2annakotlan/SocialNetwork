@@ -66,10 +66,10 @@ def display_admin_profile_button():
             if delete:
                 delete_column(institution, header)
                 st.success("deleting column")
-    col1, col2 = st.columns() 
-    with col1:
+    col3, col4 = st.columns() 
+    with col3:
         new_column = st.text_input("New Column:") 
-    with col2:
+    with col4:
         add = st.button("add")
     if add:
         edit_header(institution, new_column)

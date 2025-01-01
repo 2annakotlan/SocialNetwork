@@ -73,5 +73,6 @@ def display_admin_profile_button():
         add = st.button("add")
     if add:
         edit_header(institution, new_column)
+        st.experimental_rerun()
  
     

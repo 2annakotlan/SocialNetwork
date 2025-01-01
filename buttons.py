@@ -65,6 +65,7 @@ def display_admin_profile_button():
             delete = st.button("x", key=f"edit_{i}")
             if delete:
                 delete_column(institution, header)
+                st.experimental_rerun()
                 st.success("deleting column")
     col3, col4 = st.columns(2) 
     with col3:
@@ -74,5 +75,6 @@ def display_admin_profile_button():
     if add:
         edit_header(institution, new_column)
         st.experimental_rerun()
+        st.success("adding column")
  
     

@@ -56,7 +56,7 @@ def display_admin_profile_button():
     institution = str((get_data("admin", email, "institution")).iloc[0, 0])
     st.write(institution)
     existing_headers = get_header(institution)
-    st.write("Data Collected:")
+    st.write("Data Collected:") 
     for i, header in enumerate(existing_headers):
         col1, col2 = st.columns([.2, 1]) 
         with col1:

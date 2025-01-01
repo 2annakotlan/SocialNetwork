@@ -68,16 +68,38 @@ def display_admin_profile_button():
             st.experimental_rerun()
             st.success("deleting column")
             
-    # Layout for text input and button
-    col3, col4 = st.columns([3, 1])  # Adjust proportions
+def display_admin_profile_button():
+    email = st.session_state.admin_email
+    institution = str((get_data("admin", email, "institution")).iloc[0, 0])
+    st.write(institution)
+
+    # Fetch headers initially
+    existing_headers = get_header(institution)
+    st.write("Data Collected:")
+
+    for i, header in enumerate(existing_headers):
+        col1, col2 = st.columns([0.2, 1])
+        with col1:
+            st.write(f"- {header}")
+        with col2:
+            delete = st.button("x", key=f"edit_{i}")
+            if delete:
+                delete_column(institution, header)
+                st.success("Column deleted")
+                st.experimental_rerun()
+
+    # Layout for text input and button with proper vertical alignment
+    col3, col4 = st.columns([3, 1])
     with col3:
         new_column = st.text_input("New Column:")
     with col4:
-        add = st.button("Add", use_container_width=True)  # Ensures the button fills its column width
+        st.write("")  # Adds padding to align the button with the center of the text_input
+        add = st.button("Add")
 
     if add:
         edit_header(institution, new_column)
         st.success("Column added")
         st.experimental_rerun()
+
  
     

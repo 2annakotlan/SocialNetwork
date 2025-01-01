@@ -90,10 +90,9 @@ def display_admin_profile_button():
 
     col3, col4 = st.columns([3, 1])
     with col3:
-        new_column = st.text_input("", key="new_column_input")  # No label here
+        new_column = st.text_input("New Column:")
     with col4:
-        st.write("")  # Padding to align the button
-        add = st.button("+")  # Button with "+" symbol
+        add = st.button("Add")
 
     if add:
         edit_header(institution, new_column)

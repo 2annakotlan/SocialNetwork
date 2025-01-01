@@ -82,7 +82,7 @@ def display_admin_profile_button():
         with col1:
             st.write(f"- {header}")
         with col2:
-            delete = st.button("x", key=f"edit_{i}")
+            delete = st.button("❌", key=f"edit_{i}")
             if delete:
                 delete_column(institution, header)
                 st.success("Column deleted")
@@ -92,7 +92,7 @@ def display_admin_profile_button():
     with col3:
         new_column = st.text_input("New Column:")
     with col4:
-        add = st.button("+")
+        add = st.button("➕")
 
     if add:
         edit_header(institution, new_column)

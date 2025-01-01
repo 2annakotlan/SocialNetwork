@@ -55,6 +55,7 @@ def display_admin_profile_button():
     email = st.session_state.admin_email
     institution = get_data("admin", email, "institution")
     st.write(institution)
+    st.write(f"Datatype of the result: {type(institution)}")
     '''
     existing_headers = get_header(institution)
     st.write("Data Collected:")

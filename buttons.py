@@ -33,7 +33,7 @@ def display_admin_email_button(login_target_page, signup_target_page):
     institution = st.text_input("Institution:", value=institution_guess) if email and email not in existing_emails.values else None
     
     if st.button("Enter"):   
-        st.session_state.admin_email = email  
+        st.session_state.admin_email = email    
         if email in existing_emails.values: # existing email --> logging in
             st.session_state.page = login_target_page
             st.success("Logging In")

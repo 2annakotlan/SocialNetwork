@@ -63,18 +63,21 @@ def display_admin_profile_button():
             st.write(f"- {header}")
         with col2:
             delete = st.button("x", key=f"edit_{i}")
-            if delete:
-                delete_column(institution, header)
-                st.experimental_rerun()
-                st.success("deleting column")
-    col3, col4 = st.columns(2) 
+        if delete:
+            delete_column(institution, header)
+            st.experimental_rerun()
+            st.success("deleting column")
+            
+    col3, col4 = st.columns([3, 1])  
     with col3:
-        new_column = st.text_input("New Column:") 
+        new_column = st.text_input("New Column:")
     with col4:
-        add = st.button("add")
+        st.text("")  # Add an empty text widget for spacing
+        add = st.button("Add")
+
     if add:
         edit_header(institution, new_column)
+        st.success("Column added")
         st.experimental_rerun()
-        st.success("adding column")
  
     

@@ -66,6 +66,7 @@ def display_admin_profile_button():
         col1, col2 = st.columns([0.2, 1])
         with col1:
             header_text = f"- {header}"
+            st.write(header_text)
         with col2:
             delete = st.button("❌", key=f"edit_{i}")
             if delete:

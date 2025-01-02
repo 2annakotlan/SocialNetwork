@@ -50,23 +50,6 @@ def display_admin_email_button(login_target_page, signup_target_page):
             edit_header(institution, "interests") 
             st.session_state.page = signup_target_page  
             st.success("Signing Up")
-
-def display_admin_profile_button():
-    email = st.session_state.admin_email
-    institution = str((get_data("admin", email, "institution")).iloc[0, 0])
-    st.write(institution)
-    existing_headers = get_header(institution)
-    st.write("Data Collected:") 
-    for i, header in enumerate(existing_headers):
-        col1, col2 = st.columns([.2, 1]) 
-        with col1:
-            st.write(f"- {header}")
-        with col2:
-            delete = st.button("x", key=f"edit_{i}")
-        if delete:
-            delete_column(institution, header)
-            st.experimental_rerun()
-            st.success("deleting column")
             
 def display_admin_profile_button():
     email = st.session_state.admin_email
@@ -76,26 +59,31 @@ def display_admin_profile_button():
     existing_headers = get_header(institution)
     st.write("Data Collected:")
 
+    deleted_headers = []  # List to track deleted headers
+    added_headers = []  # List to track added headers
+
     for i, header in enumerate(existing_headers):
         col1, col2 = st.columns([0.2, 1])
         with col1:
-            st.write(f"- {header}")
+            # Apply strikethrough if the header is in the deleted list
+            header_text = f"- {header}"
+            if header in deleted_headers:
+                header_text = f"~~{header}~~"
+            st.markdown(header_text)
         with col2:
             delete = st.button("❌", key=f"edit_{i}")
             if delete:
-                delete_column(institution, header)
-                st.success("Column deleted")
-                st.rerun()
+                # Add the header to the deleted list
+                deleted_headers.append(header)
+
+    # New column input section
     col3, col4 = st.columns([3, 1])
     with col3:
         new_column = st.text_input("New Column:")
     with col4:
         add = st.button("➕")
 
-    if add:
-        edit_header(institution, new_column)
-        st.success("Column added")
-        st.rerun()
-
- 
-    
+    if add and new_column:
+        # Add the new column as a bullet point
+        added_headers.append(new_column)
+        st.markdown(f"- {new_column}")  # Display the added header as a bullet point

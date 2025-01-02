@@ -67,12 +67,20 @@ def display_admin_profile_button():
     for i, header in enumerate(existing_headers):
         col1, col2 = st.columns([0.2, 1])
         with col1:
-            header_text = f"- {header}"
+            if header in st.session_state.deleted_headers:
+                header_text = f"- ~~{header}~~"
+            else:
+                header_text = f"- {header}"
             st.write(header_text)
         with col2:
-            delete = st.button("❌", key=f"edit_{i}")
-            if delete:
-                st.session_state.deleted_headers.append(header)
+            if header in st.session_state.deleted_headers:
+                restore = st.button("➕", key=f"restore_{i}")
+                if restore:
+                    st.session_state.deleted_headers.remove(header)
+            else:
+                delete = st.button("❌", key=f"edit_{i}")
+                if delete:
+                    st.session_state.deleted_headers.append(header)
 
     col3, col4 = st.columns([3, 1])
     with col3:

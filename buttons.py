@@ -79,5 +79,5 @@ def display_admin_profile_button():
         if add:
             st.session_state.added_headers.append(new_column)
 
-    st.write(deleted_headers)
-    st.write(added_headers)
+    st.write(st.session_state.deleted_headers)
+    st.write(st.session_state.added_headers)

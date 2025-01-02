@@ -59,47 +59,25 @@ def display_admin_profile_button():
     existing_headers = get_header(institution)
     st.write("Data Collected:")
 
-    # Initialize the session state for deleted and added headers if not already present
-    if "deleted_headers" not in st.session_state:
-        st.session_state.deleted_headers = []
-    if "added_headers" not in st.session_state:
-        st.session_state.added_headers = []
-
-    # Lists to track deleted and added headers
-    deleted_headers = st.session_state.deleted_headers
-    added_headers = st.session_state.added_headers
+    st.session_state.deleted_headers = []
+    st.session_state.added_headers = []
 
     for i, header in enumerate(existing_headers):
         col1, col2 = st.columns([0.2, 1])
         with col1:
-            # Apply strikethrough if the header is in the deleted list
             header_text = f"- {header}"
-            if header in deleted_headers:
-                header_text = f"~~{header}~~"
-            st.markdown(header_text)
         with col2:
             delete = st.button("❌", key=f"edit_{i}")
             if delete:
-                # Add the header to the deleted list
-                if header not in deleted_headers:
-                    deleted_headers.append(header)
+                st.session_state.deleted_headers.append(header)
 
-    # New column input section
     col3, col4 = st.columns([3, 1])
     with col3:
         new_column = st.text_input("New Column:")
     with col4:
         add = st.button("➕")
-
-    if add and new_column:
-        # Add the new column to the added headers list
-        if new_column not in added_headers:
-            added_headers.append(new_column)
-        st.markdown(f"- {new_column}")  # Display the added header as a bullet point
-
-    # Save the modified lists back to the session state
-    st.session_state.deleted_headers = deleted_headers
-    st.session_state.added_headers = added_headers
+        if add:
+            st.session_state.added_headers.append(new_column)
 
     st.write(deleted_headers)
     st.write(added_headers)

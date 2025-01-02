@@ -87,3 +87,6 @@ def display_admin_profile_button():
         # Add the new column as a bullet point
         added_headers.append(new_column)
         st.markdown(f"- {new_column}")  # Display the added header as a bullet point
+
+    st.write(deleted_headers)
+    st.write(added_headers)

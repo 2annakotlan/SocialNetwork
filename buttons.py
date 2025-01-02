@@ -59,8 +59,15 @@ def display_admin_profile_button():
     existing_headers = get_header(institution)
     st.write("Data Collected:")
 
-    deleted_headers = []  # List to track deleted headers
-    added_headers = []  # List to track added headers
+    # Initialize the session state for deleted and added headers if not already present
+    if "deleted_headers" not in st.session_state:
+        st.session_state.deleted_headers = []
+    if "added_headers" not in st.session_state:
+        st.session_state.added_headers = []
+
+    # Lists to track deleted and added headers
+    deleted_headers = st.session_state.deleted_headers
+    added_headers = st.session_state.added_headers
 
     for i, header in enumerate(existing_headers):
         col1, col2 = st.columns([0.2, 1])
@@ -74,7 +81,8 @@ def display_admin_profile_button():
             delete = st.button("❌", key=f"edit_{i}")
             if delete:
                 # Add the header to the deleted list
-                deleted_headers.append(header)
+                if header not in deleted_headers:
+                    deleted_headers.append(header)
 
     # New column input section
     col3, col4 = st.columns([3, 1])
@@ -84,9 +92,14 @@ def display_admin_profile_button():
         add = st.button("➕")
 
     if add and new_column:
-        # Add the new column as a bullet point
-        added_headers.append(new_column)
+        # Add the new column to the added headers list
+        if new_column not in added_headers:
+            added_headers.append(new_column)
         st.markdown(f"- {new_column}")  # Display the added header as a bullet point
+
+    # Save the modified lists back to the session state
+    st.session_state.deleted_headers = deleted_headers
+    st.session_state.added_headers = added_headers
 
     st.write(deleted_headers)
     st.write(added_headers)

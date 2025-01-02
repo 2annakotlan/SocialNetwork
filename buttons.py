@@ -77,10 +77,12 @@ def display_admin_profile_button():
                 restore = st.button("➕", key=f"restore_{i}")
                 if restore:
                     st.session_state.deleted_headers.remove(header)
+                    st.experimental_rerun()
             else:
                 delete = st.button("❌", key=f"edit_{i}")
                 if delete:
                     st.session_state.deleted_headers.append(header)
+                    st.experimental_rerun()
 
     for i, new_header in enumerate(st.session_state.added_headers):
         col1, col2 = st.columns([0.2, 1])
@@ -90,14 +92,17 @@ def display_admin_profile_button():
             delete_added = st.button("❌", key=f"delete_added_{i}")
             if delete_added:
                 st.session_state.added_headers.remove(new_header)
+                st.experimental_rerun()
 
     col3, col4 = st.columns([3, 1])
     with col3:
-        new_column = st.text_input("New Column:")
+        new_column = st.text_input("New Column:", key="new_column_input")
     with col4:
-        add = st.button("➕")
-        if add:
-            st.session_state.added_headers.append(new_column)
+        add = st.button("➕", key="add_new_column")
+        if add and new_column.strip():
+            st.session_state.added_headers.append(new_column.strip())
+            st.session_state.new_column_input = ""  # Clear the input field
+            st.experimental_rerun()
 
     st.write(st.session_state.deleted_headers)
     st.write(st.session_state.added_headers)

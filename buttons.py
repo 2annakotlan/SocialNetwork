@@ -82,14 +82,14 @@ def display_admin_profile_button():
                 if delete:
                     st.session_state.deleted_headers.append(header)
 
-    for i, added_header in enumerate(st.session_state.added_headers):
+    for i, new_header in enumerate(st.session_state.added_headers):
         col1, col2 = st.columns([0.2, 1])
         with col1:
-            st.write(f"- {added_header}")
+            st.write(f"- {new_header}")
         with col2:
-            remove = st.button("❌", key=f"remove_{i}")
-            if remove:
-                st.session_state.added_headers.remove(added_header)
+            delete_added = st.button("❌", key=f"delete_added_{i}")
+            if delete_added:
+                st.session_state.added_headers.remove(new_header)
 
     col3, col4 = st.columns([3, 1])
     with col3:

@@ -92,12 +92,11 @@ def display_admin_profile_button():
 
     col3, col4 = st.columns([3, 1])
     with col3:
-        new_column = st.text_input("New Column:", key="new_column_input")  # Add a key for the text_input widget
+        new_column = st.text_input("New Column:", key="new_column_input")
     with col4:
         add = st.button("➕")
-        if add and new_column.strip():  # Ensure the new column is not empty
+        if add and new_column.strip():
             st.session_state.added_headers.append(new_column.strip())
-            st.experimental_rerun()
 
     st.write(st.session_state.deleted_headers)
     st.write(st.session_state.added_headers)

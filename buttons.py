@@ -59,8 +59,10 @@ def display_admin_profile_button():
     existing_headers = get_header(institution)
     st.write("Data Collected:")
 
-    st.session_state.deleted_headers = []
-    st.session_state.added_headers = []
+    if "deleted_headers" not in st.session_state:
+        st.session_state.deleted_headers = []
+    if "added_headers" not in st.session_state:
+        st.session_state.added_headers = []
 
     for i, header in enumerate(existing_headers):
         col1, col2 = st.columns([0.2, 1])

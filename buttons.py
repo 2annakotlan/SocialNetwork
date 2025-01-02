@@ -73,7 +73,6 @@ def display_admin_profile_button():
     institution = str((get_data("admin", email, "institution")).iloc[0, 0])
     st.write(institution)
 
-    # Fetch headers initially
     existing_headers = get_header(institution)
     st.write("Data Collected:")
 

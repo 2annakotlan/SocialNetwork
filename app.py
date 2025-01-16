@@ -45,7 +45,6 @@ def display_admin_signin_page():
 def display_admin_signup_page():
     st.write("Admin Sign Up Page")
     display_button("Sign Up", "admin_profile_page")
-    display_button("Back", "admin_start_page")
 
 def display_admin_profile_page():
     st.write("Admin Profile Page")

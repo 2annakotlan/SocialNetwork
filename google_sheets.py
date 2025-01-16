@@ -16,12 +16,12 @@ def read_values(sheet_name, row_name, column_name):
     data = result.get('values', [])
     df = pd.DataFrame(data[1:], columns=data[0])
     if row_name is None and column_name is not None:
-        data = df[[column_name]]  
+        values = df[[column_name]]  
     elif column_name is None and row_name is not None:
-        data = df[df.iloc[:, 0] == row_name] 
+        values = df[df.iloc[:, 0] == row_name] 
     elif row_name is not None and column_name is not None:
-        data = df[df.iloc[:, 0] == row_name][[column_name]] 
-    return data 
+        values = df[df.iloc[:, 0] == row_name][[column_name]] 
+    return values 
 
 def read_header(sheet_name):
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()

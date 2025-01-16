@@ -25,6 +25,7 @@ def display_admin_start_page():
     st.write("Admin Start Page")
     display_button("Login", "admin_login_page")
     display_button("Signup", "admin_signup_page")
+    display_button("Back", "landing_page")
 
 def display_admin_login_page():
     st.write("Admin Login Page")

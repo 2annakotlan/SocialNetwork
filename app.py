@@ -8,18 +8,28 @@ def display_landing_page():
 
 def display_student_start_page():
     st.write("Student Start Page")
-    display_student_email_button("student_landing_page", "student_profile_page")
+    display_button("Sign In", "student_signin_page")
+    display_button("Sign Up", "student_signup_page")
     display_button("Back", "landing_page")
+
+def display_student_signin_page():
+    st.write("Student Sign In Page")
+    display_button("Sign In", "student_landing_page")
+    display_button("Back", "student_start_page")
+
+def display_student_signup_page():
+    st.write("Student Sign Up Page")
+    display_button("Sign Up", "student_profile_page")
+    display_button("Back", "student_start_page")
 
 def display_student_profile_page():
     st.write("Student Profile Page")
     display_button("Save Changes", "student_landing_page")
-    display_button("Log out", "landing_page")
 
 def display_student_landing_page():
     st.write("Student Landing Page")
     display_button("Edit Profile", "student_profile_page")
-    display_button("Log out", "landing_page")
+    display_button("Sign Out", "landing_page")
 
 def display_admin_start_page():
     st.write("Admin Start Page")

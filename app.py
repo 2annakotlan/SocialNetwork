@@ -1,12 +1,6 @@
 import streamlit as st
 from buttons import *
 
-'''
-def display_blablabla_page():
-    st.write("blablabla Page") # page title
-    display_button("button name", "blablabla_page") # button to go to another page
-'''
-
 def display_landing_page():
     st.write("Landing Page")
     display_button("Student", "student_start_page")

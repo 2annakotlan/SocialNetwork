@@ -1,5 +1,4 @@
 import streamlit as st
-from buttons import *
 
 def display_landing_page():
     st.write("Landing Page")

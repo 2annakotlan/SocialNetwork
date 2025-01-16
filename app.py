@@ -23,32 +23,29 @@ def display_student_landing_page():
 
 def display_admin_start_page():
     st.write("Admin Start Page")
-    display_button("Login", "admin_login_page")
-    display_button("Signup", "admin_signup_page")
+    display_button("Sign In", "admin_signin_page")
+    display_button("Sign Up", "admin_signup_page")
     display_button("Back", "landing_page")
 
-def display_admin_login_page():
-    st.write("Admin Login Page")
-    display_admin_email_button("admin_landing_page", "admin_profile_page")
+def display_admin_signin_page():
+    st.write("Admin Signin Page")
+    display_button("Next", "admin_landing_page")
     display_button("Back", "landing_page")
 
 def display_admin_signup_page():
     st.write("Admin Signup Page")
-    display_admin_email_button("admin_landing_page", "admin_profile_page")
+    display_button("Next", "admin_profile_page")
     display_button("Back", "landing_page")
 
 def display_admin_profile_page():
-    email = st.session_state.admin_email
-    #institution = get_data("admin", email, "institution").to_csv(index=False, header=False)
-    #st.write(f"{institution} Administration Profile Page")
-    display_admin_profile_button()
+    st.write("Admin Profile Page")
     display_button("Save Changes", "admin_landing_page")
-    display_button("Log out", "landing_page")
+    display_button("Sign Out", "landing_page")
 
 def display_admin_landing_page():
     st.write("Admin Landing Page")
     display_button("Edit Profile", "admin_profile_page")
-    display_button("Log out", "landing_page")
+    display_button("Sign Out", "landing_page")
 
 if 'page' not in st.session_state:
     st.session_state.page = 'landing_page'

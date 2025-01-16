@@ -9,6 +9,9 @@ def display_button(label, target_page):
 
 def display_email_button(label, target_page):
     email = st.text_input("Email:")
+    if st.button(label):
+        st.session_state.email = email
+        st.session_state.page = target_page
     
 def display_student_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")

@@ -11,7 +11,7 @@ def get_sheets_service():
 
 service = get_sheets_service()
 
-def get_data(sheet_name, row_name, column_name):
+def read_values(sheet_name, row_name, column_name):
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()
     data = result.get('values', [])
     df = pd.DataFrame(data[1:], columns=data[0])
@@ -23,7 +23,7 @@ def get_data(sheet_name, row_name, column_name):
         data = df[df.iloc[:, 0] == row_name][[column_name]] 
     return data 
 
-def get_header(sheet_name):
+def read_header(sheet_name):
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()
     data = result.get('values', [])
     df = pd.DataFrame(data[1:], columns=data[0])  

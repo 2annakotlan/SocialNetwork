@@ -40,7 +40,6 @@ def display_admin_signup_page():
 def display_admin_profile_page():
     st.write("Admin Profile Page")
     display_button("Save Changes", "admin_landing_page")
-    display_button("Sign Out", "landing_page")
 
 def display_admin_landing_page():
     st.write("Admin Landing Page")

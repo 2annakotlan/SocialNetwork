@@ -30,12 +30,12 @@ def display_admin_start_page():
 def display_admin_signin_page():
     st.write("Admin Signin Page")
     display_button("Next", "admin_landing_page")
-    display_button("Back", "landing_page")
+    display_button("Back", "admin_start_page")
 
 def display_admin_signup_page():
     st.write("Admin Signup Page")
     display_button("Next", "admin_profile_page")
-    display_button("Back", "landing_page")
+    display_button("Back", "admin_start_page")
 
 def display_admin_profile_page():
     st.write("Admin Profile Page")

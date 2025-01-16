@@ -2,7 +2,11 @@ import streamlit as st
 from google_sheets import *
 import time
 
-
+def display_button(label, target_page):
+    button_key = f"{label}_{target_page}"
+    if st.button(label, key=button_key):
+        st.session_state.page = target_page
+        
 def display_student_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
     existing_domain = "@gmail.com"

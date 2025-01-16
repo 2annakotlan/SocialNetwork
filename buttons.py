@@ -9,10 +9,12 @@ def display_button(label, target_page):
 
 def display_email_button(label, target_page):
     email = st.text_input("Email:")
+    existing_emails = get_data("admin", None, "email")
     if st.button(label):
         st.session_state.email = email
         st.session_state.page = target_page
-    
+
+'''
 def display_student_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
     existing_domain = "@gmail.com"
@@ -107,4 +109,4 @@ def display_admin_profile_button():
 
     st.write(st.session_state.deleted_headers)
     st.write(st.session_state.added_headers)
-
+'''

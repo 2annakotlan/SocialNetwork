@@ -20,12 +20,12 @@ def display_admin_email_button(signin_target_page, signup_target_page):
             st.success("Signing Up")
             st.session_state.email = email
             st.session_state.page = signup_target_page
-                    edit_cell(sheet_name="admin", column_name="email", row_name="append", value=email)
-                    create_new_sheet(sheet_name=email)
-                    edit_header(sheet_name=email, value="name")
-                    edit_header(sheet_name=email, value="friends")
-                    edit_header(sheet_name=email, value="activities") 
-                    edit_header(sheet_name=email, value="interests") 
+            edit_cell(sheet_name="admin", column_name="email", row_name="append", value=email)
+            create_new_sheet(sheet_name=email)
+            edit_header(sheet_name=email, value="name")
+            edit_header(sheet_name=email, value="friends")
+            edit_header(sheet_name=email, value="activities") 
+            edit_header(sheet_name=email, value="interests") 
 '''
 def display_student_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")

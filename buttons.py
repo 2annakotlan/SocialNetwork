@@ -27,26 +27,14 @@ def display_admin_email_button(signin_target_page, signup_target_page):
             edit_header(sheet_name=email, value="activities") 
             edit_header(sheet_name=email, value="interests") 
 
-def display_admin_profile_button(target_page):
+def display_admin_profile_button(label, target_page):
     email = st.session_state.email
     st.write(email)
     #delete_sheet(email)
+    if st.button(label):
+        st.session_state.page = target_page
     
-    if st.button("Enter"):
-        if email in existing_emails.values: # <-- SIGNING IN
-            st.success("Signing In")
-            st.session_state.email = email
-            st.session_state.page = signin_target_page
-        if email not in existing_emails.values: # <-- SIGNING UP
-            st.success("Signing Up")
-            st.session_state.email = email
-            st.session_state.page = signup_target_page
-            edit_cell(sheet_name="admin", column_name="email", row_name="append", value=email)
-            create_new_sheet(new_sheet_name=email)
-            edit_header(sheet_name=email, value="name")
-            edit_header(sheet_name=email, value="friends")
-            edit_header(sheet_name=email, value="activities") 
-            edit_header(sheet_name=email, value="interests") 
+
 '''
 def display_student_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")

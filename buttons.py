@@ -40,7 +40,7 @@ def display_admin_profile_button(label, target_page, delete_account_target_page)
     if st.button("Delete Account"):
         st.success("Deleting Account")
         delete_sheet(email)
-        st.session_state.page = delete_account_taget_page
+        st.session_state.page = delete_account_target_page
         st.session_state.email = None
         
     if st.button(label):

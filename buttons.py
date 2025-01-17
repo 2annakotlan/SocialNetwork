@@ -11,7 +11,7 @@ def display_admin_email_button(signin_target_page, signup_target_page):
     email = st.text_input("Email:")
     existing_emails = read_values(sheet_name="admin", row_name=None, column_name="email")
     
-    if st.button(label):
+    if st.button("Enter"):
         if email in existing_emails.values: # <-- SIGNING IN
             st.success("Signing In")
             st.session_state.email = email

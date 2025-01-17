@@ -20,7 +20,6 @@ def display_admin_email_button(label, signin_target_page, signup_target_page):
             st.success("Signing Up")
             st.session_state.email = email
             st.session_state.page = signup_target_page
-            edit_cell(sheet_name="admin", column_name="email", row_name="append", value=email)
             create_new_sheet(new_sheet_name=email)
             edit_header(sheet_name=email, value="name")
             edit_header(sheet_name=email, value="friends")
@@ -30,15 +29,15 @@ def display_admin_email_button(label, signin_target_page, signup_target_page):
 def display_admin_profile_button(label, target_page):
     email = st.session_state.email
     st.write(email)
-    if st.button("Delete Account"):
-        st.success("Deleting Account")
-        delete_sheet(email)
     add_header = st.text_input("Add Headers:")
     if st.button("Add Header"):
         edit_header(sheet_name=email, value=add_header) 
     delete_header = st.text_input("Delete Headers:")
     if st.button("Delete Header"):
         delete_column(sheet_name=email, column_name=delete_header)
+    if st.button("Delete Account"):
+        st.success("Deleting Account")
+        delete_sheet(email)
         
     if st.button(label):
         st.session_state.page = target_page

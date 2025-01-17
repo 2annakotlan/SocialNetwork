@@ -9,7 +9,7 @@ def display_button(label, target_page):
 
 def display_admin_email_button(label, signin_target_page, signup_target_page):
     email = st.text_input("Email:")
-    existing_emails = get_data("admin", None, "email")
+    existing_emails = read_values(sheet_name="admin", row_name=None, column_name="email")
     if st.button("Enter"):
         if email in existing_emails.values:
             st.success("Signing In")

@@ -16,7 +16,7 @@ def display_admin_email_button(signin_target_page, signup_target_page):
             st.success("Signing In")
             st.session_state.email = email
             st.session_state.page = signin_target_page
-        if email not in existing_emails.values: <-- SIGNING UP
+        if email not in existing_emails.values: # <-- SIGNING UP
             st.success("Signing Up")
             st.session_state.email = email
             st.session_state.page = signup_target_page

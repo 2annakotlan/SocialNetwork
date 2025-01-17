@@ -21,12 +21,12 @@ def display_student_landing_page():
 
 def display_admin_credentials_page():
     st.write("Admin Credentials Page")
-    display_admin_email_button(signin_target_page="admin_landing_page", signup_target_page="admin_profile_page")
+    display_admin_email_button(label="Enter", signin_target_page="admin_landing_page", signup_target_page="admin_profile_page")
     display_button(label="Back", target_page="landing_page")
 
 def display_admin_profile_page():
     st.write("Admin Profile Page")
-    display_admin_profile_button(label="Save Chnages", target_page="admin_landing_page")
+    display_admin_profile_button(label="Save Changes", target_page="admin_landing_page")
 
 def display_admin_landing_page():
     st.write("Admin Landing Page")

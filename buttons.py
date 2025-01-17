@@ -10,7 +10,6 @@ def display_button(label, target_page):
 def display_admin_email_button(label, signin_target_page, signup_target_page):
     email = st.text_input("Email:")
     existing_emails = read_sheet_names()
-    st.write(existing_emails)
 
     if st.button(label):
         if email in existing_emails: # <-- SIGNING IN
@@ -30,7 +29,8 @@ def display_admin_email_button(label, signin_target_page, signup_target_page):
 
 def display_admin_profile_button(label, target_page):
     email = st.session_state.email
-    st.write(email)
+    existing_headers = read_header(email)
+    st.write(existing_headers)
     add_header = st.text_input("Add Headers:")
     if st.button("Add Header"):
         edit_header(sheet_name=email, value=add_header) 

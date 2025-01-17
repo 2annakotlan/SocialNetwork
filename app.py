@@ -3,8 +3,8 @@ from buttons import *
 
 def display_landing_page():
     st.write("Landing Page")
-    display_button(label="Student", target_page="student_start_page")
-    display_button(label="Admin", target_page="admin_start_page")
+    display_button(label="Student", target_page="student_credentials_page")
+    display_button(label="Admin", target_page="admin_credentials_page")
 
 def display_student_credentials_page():
     st.write("Student Credentials Page")

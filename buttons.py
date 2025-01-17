@@ -7,19 +7,25 @@ def display_button(label, target_page):
     if st.button(label, key=button_key):
         st.session_state.page = target_page
 
-def display_admin_email_button(label, signin_target_page, signup_target_page):
+def display_admin_email_button(signin_target_page, signup_target_page):
     email = st.text_input("Email:")
     existing_emails = read_values(sheet_name="admin", row_name=None, column_name="email")
-    if st.button("Enter"):
-        if email in existing_emails.values:
+    
+    if st.button(label):
+        if email in existing_emails.values: # <-- SIGNING IN
             st.success("Signing In")
             st.session_state.email = email
             st.session_state.page = signin_target_page
-        else:
+        if email not in existing_emails.values: <-- SIGNING UP
             st.success("Signing Up")
             st.session_state.email = email
             st.session_state.page = signup_target_page
-
+                    edit_cell(sheet_name="admin", column_name="email", row_name="append", value=email)
+                    create_new_sheet(sheet_name=email)
+                    edit_header(sheet_name=email, value="name")
+                    edit_header(sheet_name=email, value="friends")
+                    edit_header(sheet_name=email, value="activities") 
+                    edit_header(sheet_name=email, value="interests") 
 '''
 def display_student_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")

@@ -30,7 +30,7 @@ def display_admin_email_button(label, signin_target_page, signup_target_page):
 def display_admin_profile_button(label, target_page):
     email = st.session_state.email
     st.write(email)
-    if st.button("Delete Account")
+    if st.button("Delete Account"):
         st.success("Deleting Account")
         delete_sheet(email)
     add_header = st.text_input("Add Headers:")

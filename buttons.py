@@ -9,7 +9,7 @@ def display_button(label, target_page):
 
 def display_admin_email_button(label, signin_target_page, signup_target_page):
     email = st.text_input("Email:")
-    existing_emails = read_sheet_names().values()
+    existing_emails = (read_sheet_names()).values()
     st.write(existing_emails)
 
     if st.button(label):

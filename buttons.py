@@ -27,7 +27,7 @@ def display_admin_email_button(label, signin_target_page, signup_target_page):
             edit_header(sheet_name=email, value="interests") 
         
 
-def display_admin_profile_button(label, target_page):
+def display_admin_profile_button(label, target_page, delete_account_target_page):
     email = st.session_state.email
     existing_headers = read_header(email)
     st.write(existing_headers)
@@ -40,6 +40,8 @@ def display_admin_profile_button(label, target_page):
     if st.button("Delete Account"):
         st.success("Deleting Account")
         delete_sheet(email)
+        st.session_state.page = delete_account_taget_page
+        st.session_state.email = None
         
     if st.button(label):
         st.session_state.page = target_page

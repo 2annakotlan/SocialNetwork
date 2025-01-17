@@ -6,14 +6,9 @@ def display_landing_page():
     display_button(label="Student", target_page="student_start_page")
     display_button(label="Admin", target_page="admin_start_page")
 
-def display_student_start_page():
-    st.write("Student Start Page")
-    display_button(label="Credentials", target_page="student_credentials_page")
-    display_button(label="Back", target_page="landing_page")
-
 def display_student_credentials_page():
-    st.write("Student Sign In Page")
-    display_button(label="Back", target_page="student_start_page")
+    st.write("Student Credentials Page")
+    display_button(label="Back", target_page="landing_page")
 
 def display_student_profile_page():
     st.write("Student Profile Page")
@@ -24,15 +19,10 @@ def display_student_landing_page():
     display_button(label="Edit Profile", target_page="student_profile_page")
     display_button(label="Sign Out", target_page="landing_page")
 
-def display_admin_start_page():
-    st.write("Admin Start Page")
-    display_button(label="Credentials", target_page="admin_credentials_page")
-    display_button(label="Back", target_page="landing_page")
-
 def display_admin_credentials_page():
     st.write("Admin Credentials Page")
     display_admin_email_button(label="Email", signin_target_page="admin_landing_page", signup_target_page="admin_profile_page")
-    display_button(label="Back", target_page="admin_start_page")
+    display_button(label="Back", target_page="landing_page")
 
 def display_admin_profile_page():
     st.write("Admin Profile Page")

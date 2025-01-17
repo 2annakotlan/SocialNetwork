@@ -7,12 +7,18 @@ def display_button(label, target_page):
     if st.button(label, key=button_key):
         st.session_state.page = target_page
 
-def display_email_button(label, target_page):
+def display_admin_email_button(label, signin_target_page, signup_target_page):
     email = st.text_input("Email:")
     existing_emails = get_data("admin", None, "email")
-    if st.button(label):
-        st.session_state.email = email
-        st.session_state.page = target_page
+    if st.button("Enter"):
+        if email in existing_emails.values:
+            st.success("Signing In")
+            st.session_state.email = email
+            st.session_state.page = signin_target_page
+        else:
+            st.success("Signing Up")
+            st.session_state.email = email
+            st.session_state.page = signup_target_page
 
 '''
 def display_student_email_button(login_target_page, signup_target_page):

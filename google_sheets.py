@@ -33,6 +33,12 @@ def read_header(sheet_name):
 def create_new_sheet(new_sheet_name):
     service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
 
+def delete_sheet(sheet_name):
+    spreadsheets = service.spreadsheets().get(spreadsheetId=spreadsheetId).execute()
+    sheets = spreadsheets.get('sheets', [])
+    sheet_id = next((sheet["properties"]["sheetId"] for sheet in sheets if sheet["properties"]["title"] == sheet_name), None)
+    service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"deleteSheet": {"sheetId": sheet_id}}]}).execute()
+
 def edit_cell(sheet_name, column_name, row_name, value):
     column_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get("values", [[]])[0]
     column_index = chr(65 + column_names.index(column_name))

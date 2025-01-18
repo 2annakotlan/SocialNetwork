@@ -24,7 +24,7 @@ def read_values(sheet_name, row_name, column_name):
     return values 
 
 def create_sheet(sheet_name):
-    service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
+    service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"addSheet": {"properties": {"title": sheet_name}}}]}).execute()
 
 def delete_sheet(sheet_name):
     spreadsheets = service.spreadsheets().get(spreadsheetId=spreadsheetId).execute()

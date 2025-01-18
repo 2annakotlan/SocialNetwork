@@ -70,7 +70,7 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
             st.success("Signing Up")
             st.session_state.email = email
             st.session_state.page = signup_target_page
-            createsheet(new_sheet_name=email)
+            create_sheet(new_sheet_name=email)
             add_column(sheet_name=email, value="email")
             add_column(sheet_name=email, value="friends")
             add_column(sheet_name=email, value="activities") 

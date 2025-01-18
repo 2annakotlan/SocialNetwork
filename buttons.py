@@ -11,11 +11,11 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
     existing_admin_emails = read_sheet()
     if st.button(label):
         domain = email.split("@")[1]
-        if any(domain in i for i in existing_admin_emails) # <-- SIGNING IN
+        if any(domain in i for i in existing_admin_emails): # <-- SIGNING IN
             st.success("Signing In")
             st.session_state.email = email
             st.session_state.page = signin_target_page
-        if not any(domain in i for i in existing_admin_emails) # <-- SIGNING UP  
+        if not any(domain in i for i in existing_admin_emails): # <-- SIGNING UP  
             st.success("Signing Up")
             st.session_state.email = email
             st.session_state.page = signup_target_page

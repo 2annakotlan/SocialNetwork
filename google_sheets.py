@@ -11,7 +11,7 @@ def get_sheets_service():
 
 service = get_sheets_service()
 
-def read_values(sheet_name, row_name, column_name):
+def read_values(sheet_name, column_name, row_name):
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()
     data = result.get('values', [])
     df = pd.DataFrame(data[1:], columns=data[0])

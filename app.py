@@ -8,6 +8,7 @@ def display_landing_page():
 
 def display_student_credentials_page():
     st.write("Student Credentials Page")
+    display_student_email_button(label="Enter", signin_target_page="student_landing_page", signup_target_page="student_profile_page")
     display_button(label="Back", target_page="landing_page")
 
 def display_student_profile_page():

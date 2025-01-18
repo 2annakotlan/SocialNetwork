@@ -161,7 +161,7 @@ def display_admin_profile_button():
         add = st.button("➕")
         if add and new_column.strip():
             st.session_state.added_headers.append(new_column.strip())
-'''
+
 
     st.write(st.session_state.deleted_headers)
     st.write(st.session_state.added_headers)

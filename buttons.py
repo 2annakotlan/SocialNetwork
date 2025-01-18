@@ -20,10 +20,10 @@ def display_admin_email_button(label, signin_target_page, signup_target_page):
             st.session_state.email = email
             st.session_state.page = signup_target_page
             create_new_sheet(new_sheet_name=email)
-            edit_header(sheet_name=email, value="email")
-            edit_header(sheet_name=email, value="friends")
-            edit_header(sheet_name=email, value="activities") 
-            edit_header(sheet_name=email, value="interests") 
+            add_column(sheet_name=email, value="email")
+            add_column(sheet_name=email, value="friends")
+            add_column(sheet_name=email, value="activities") 
+            add_column(sheet_name=email, value="interests") 
         
 def display_admin_profile_button(label, target_page, delete_account_target_page):
     email = st.session_state.email

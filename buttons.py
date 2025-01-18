@@ -64,7 +64,7 @@ def display_admin_profile_button(label, target_page, delete_account_target_page)
     if st.button(label): # <-- HOME PAGE
         st.session_state.page = target_page
     
-'''
+
 def display_student_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
     existing_domain = "@gmail.com"

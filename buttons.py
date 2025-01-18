@@ -13,6 +13,7 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
         admin_email = f"admin@{email.split('@')[1]}"
         if admin_email in existing_admin_emails: 
             existing_student_emails = read_values(sheet_name=admin_email, column_name="email", row_name=None)
+            st.write(existing_student_emails)
             if email in existing_student_emails.values: # <-- SIGNING IN
                 st.success("Signing In")
                 st.session_state.email = email

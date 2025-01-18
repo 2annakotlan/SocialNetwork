@@ -11,7 +11,10 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
     existing_admin_emails = read_sheet()
     if st.button(label):
         domain = email.split("@")[1]
+        st.write(domain)
         existing_emails = read_values(sheet_name=domain, column_name="email", row_name=None)
+        st.write(existing_emails)
+        '''
         if any(domain in i for i in existing_admin_emails): 
             if email in existing_emails.values: # <-- SIGNING IN
                 st.success("Signing In")
@@ -24,6 +27,7 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
                 #edit_values(sheet_name=domain, column_name="email", row_name="append", value=email)
         if not any(domain in i for i in existing_admin_emails): # <-- INSTITUTION HAS NOT MADE AN ACCOUNT
             st.error("Your Institution Has Not Made an Account with Us")
+        '''
 
 
 def display_admin_email_button(label, signin_target_page, signup_target_page):

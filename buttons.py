@@ -29,7 +29,7 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
         if not admin_email in existing_admin_emails: # <-- INSTITUTION HAS NOT MADE AN ACCOUNT
             st.error("Your Institution Has Not Made an Account with Us")
         '''
-        '''
+
 
 
 def display_admin_email_button(label, signin_target_page, signup_target_page):
@@ -68,8 +68,8 @@ def display_admin_profile_button(label, target_page, delete_account_target_page)
         st.session_state.email = None
     if st.button(label): # <-- HOME PAGE
         st.session_state.page = target_page
-    
-
+'''
+#########################################################################
 def display_student_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")
     existing_domain = "@gmail.com"
@@ -161,6 +161,7 @@ def display_admin_profile_button():
         add = st.button("➕")
         if add and new_column.strip():
             st.session_state.added_headers.append(new_column.strip())
+'''
 
     st.write(st.session_state.deleted_headers)
     st.write(st.session_state.added_headers)

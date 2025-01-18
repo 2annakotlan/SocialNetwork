@@ -8,7 +8,7 @@ def display_button(label, target_page):
 
 def display_student_email_button(label, signin_target_page, signup_target_page):
     email = st.text_input("Email:")
-    existing_admin_emails = read_sheet_names()
+    existing_admin_emails = read_sheet()
     if st.button(label):
         domain = email.split("@")[1]
         if any(domain in i for i in existing_admin_emails) # <-- SIGNING IN
@@ -22,7 +22,7 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
 
 def display_admin_email_button(label, signin_target_page, signup_target_page):
     email = st.text_input("Email:")
-    existing_emails = read_sheet_names()
+    existing_emails = read_sheet()
 
     if st.button(label):
         if email in existing_emails: # <-- SIGNING IN
@@ -33,7 +33,7 @@ def display_admin_email_button(label, signin_target_page, signup_target_page):
             st.success("Signing Up")
             st.session_state.email = email
             st.session_state.page = signup_target_page
-            create_new_sheet(new_sheet_name=email)
+            create_sheet(new_sheet_name=email)
             add_column(sheet_name=email, value="email")
             add_column(sheet_name=email, value="friends")
             add_column(sheet_name=email, value="activities") 
@@ -41,7 +41,7 @@ def display_admin_email_button(label, signin_target_page, signup_target_page):
         
 def display_admin_profile_button(label, target_page, delete_account_target_page):
     email = st.session_state.email
-    existing_headers = read_header(email)
+    existing_headers = read_column(sheet_name=email)
     st.write(existing_headers)
     add_header = st.text_input("Add Data Field:") # <-- ADDING DATA FIELDS
     if st.button("Add Data Field"):
@@ -51,16 +51,15 @@ def display_admin_profile_button(label, target_page, delete_account_target_page)
         delete_column(sheet_name=email, column_name=delete_header)
     if st.button("Delete Account"): # <-- DELETE ACCOUNT
         st.success("Deleting Account")
-        delete_sheet(email)
+        delete_sheet(sheet_name=email)
         st.session_state.page = delete_account_target_page
         st.session_state.email = None
-        
-    if st.button(label):
+    if st.button(label): # <-- HOME PAGE
         st.session_state.page = target_page
     
 def display_student_email_button(label, signin_target_page, signup_target_page):
     email = st.text_input("Email:")
-    existing_emails = read_sheet_names()
+    existing_emails = read_sheet()
 
     if st.button(label):
         if email in existing_emails: # <-- SIGNING IN
@@ -71,11 +70,11 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
             st.success("Signing Up")
             st.session_state.email = email
             st.session_state.page = signup_target_page
-            create_new_sheet(new_sheet_name=email)
-            edit_header(sheet_name=email, value="email")
-            edit_header(sheet_name=email, value="friends")
-            edit_header(sheet_name=email, value="activities") 
-            edit_header(sheet_name=email, value="interests") 
+            createsheet(new_sheet_name=email)
+            add_column(sheet_name=email, value="email")
+            add_column(sheet_name=email, value="friends")
+            add_column(sheet_name=email, value="activities") 
+            add_column(sheet_name=email, value="interests") 
 '''
 def display_student_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")

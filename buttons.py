@@ -25,18 +25,17 @@ def display_admin_email_button(label, signin_target_page, signup_target_page):
             edit_header(sheet_name=email, value="activities") 
             edit_header(sheet_name=email, value="interests") 
         
-
 def display_admin_profile_button(label, target_page, delete_account_target_page):
     email = st.session_state.email
     existing_headers = read_header(email)
     st.write(existing_headers)
-    add_header = st.text_input("Add Headers:")
-    if st.button("Add Header"):
-        edit_header(sheet_name=email, value=add_header) 
-    delete_header = st.text_input("Delete Headers:")
-    if st.button("Delete Header"):
+    add_header = st.text_input("Add Data Fields:") # <-- ADDING DATA FIELDS
+    if st.button("Add Data Fields"):
+        add_column(sheet_name=email, value=add_header) 
+    delete_header = st.text_input("Delete Data Fields:") # <-- DELETING DATA FIELDS
+    if st.button("Delete Data Fields"):
         delete_column(sheet_name=email, column_name=delete_header)
-    if st.button("Delete Account"):
+    if st.button("Delete Account"): # <-- DELETE ACCOUNT
         st.success("Deleting Account")
         delete_sheet(email)
         st.session_state.page = delete_account_target_page
@@ -45,7 +44,24 @@ def display_admin_profile_button(label, target_page, delete_account_target_page)
     if st.button(label):
         st.session_state.page = target_page
     
+def display_student_email_button(label, signin_target_page, signup_target_page):
+    email = st.text_input("Email:")
+    existing_emails = read_sheet_names()
 
+    if st.button(label):
+        if email in existing_emails: # <-- SIGNING IN
+            st.success("Signing In")
+            st.session_state.email = email
+            st.session_state.page = signin_target_page
+        if email not in existing_emails: # <-- SIGNING UP
+            st.success("Signing Up")
+            st.session_state.email = email
+            st.session_state.page = signup_target_page
+            create_new_sheet(new_sheet_name=email)
+            edit_header(sheet_name=email, value="email")
+            edit_header(sheet_name=email, value="friends")
+            edit_header(sheet_name=email, value="activities") 
+            edit_header(sheet_name=email, value="interests") 
 '''
 def display_student_email_button(login_target_page, signup_target_page):
     email = st.text_input("Email:")

@@ -11,15 +11,13 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
     existing_admin_emails = read_sheet()
     if st.button(label):
         admin_email = f"admin@{email.split('@')[1]}"
-        existing_emails = read_values(sheet_name=admin_email, column_name="email", row_name=None)
-        st.write(existing_emails)
-        '''
-        if any(domain in i for i in existing_admin_emails): 
-            if email in existing_emails.values: # <-- SIGNING IN
+        if email in existing_admin_emails: 
+            existing_student_emails = read_values(sheet_name=admin_email, column_name="email", row_name=None)
+            if email in existing_student_emails.values: # <-- SIGNING IN
                 st.success("Signing In")
                 st.session_state.email = email
                 st.session_state.page = signin_target_page
-            if email not in existing_emails.values: # <-- SIGNING UP
+            if email not in existing_student_emails.values: # <-- SIGNING UP
                 st.success("Signing Up")
                 st.session_state.email = email
                 st.session_state.page = signup_target_page

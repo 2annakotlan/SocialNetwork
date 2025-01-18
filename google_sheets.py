@@ -23,14 +23,7 @@ def read_values(sheet_name, row_name, column_name):
         values = df[df.iloc[:, 0] == row_name][[column_name]] 
     return values 
 
-def read_header(sheet_name):
-    result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()
-    data = result.get('values', [])
-    df = pd.DataFrame(data[1:], columns=data[0])  
-    header = df.columns  
-    return header
-
-def create_new_sheet(new_sheet_name):
+def create_sheet(sheet_name):
     service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"addSheet": {"properties": {"title": new_sheet_name}}}]}).execute()
 
 def delete_sheet(sheet_name):
@@ -39,7 +32,7 @@ def delete_sheet(sheet_name):
     sheet_id = next((sheet["properties"]["sheetId"] for sheet in sheets if sheet["properties"]["title"] == sheet_name), None)
     service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"deleteSheet": {"sheetId": sheet_id}}]}).execute()
 
-def read_sheet_names():
+def read_sheet():
     spreadsheets = service.spreadsheets().get(spreadsheetId=spreadsheetId).execute()
     sheets = spreadsheets.get('sheets', [])
     sheet_names = [sheet["properties"]["title"] for sheet in sheets]
@@ -51,6 +44,13 @@ def edit_cell(sheet_name, column_name, row_name, value):
     row_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A:A").execute().get("values", [[]])
     row_index = len(row_names) + 1 if row_name == "append" else [row[0] for row in row_names].index(row_name) + 1
     service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}{row_index}", valueInputOption="RAW", body={"values": [[value]]}).execute()
+
+def read_column(sheet_name):
+    result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()
+    data = result.get('values', [])
+    df = pd.DataFrame(data[1:], columns=data[0])  
+    header = df.columns  
+    return header
 
 def add_column(sheet_name, value):
     column_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get('values', [[]])[0]  

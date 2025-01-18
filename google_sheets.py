@@ -52,7 +52,7 @@ def edit_cell(sheet_name, column_name, row_name, value):
     row_index = len(row_names) + 1 if row_name == "append" else [row[0] for row in row_names].index(row_name) + 1
     service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}{row_index}", valueInputOption="RAW", body={"values": [[value]]}).execute()
 
-def edit_header(sheet_name, value):
+def add_column(sheet_name, value):
     column_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get('values', [[]])[0]  
     column_index = chr(64 + len(column_names) + 1 )  
     service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}1", valueInputOption="RAW", body={"values": [[value]]}).execute()

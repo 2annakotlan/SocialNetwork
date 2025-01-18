@@ -6,6 +6,20 @@ def display_button(label, target_page):
     if st.button(label, key=button_key):
         st.session_state.page = target_page
 
+def display_student_email_button(label, signin_target_page, signup_target_page):
+    email = st.text_input("Email:")
+    existing_admin_emails = read_sheet_names()
+    if st.button(label):
+        domain = email.split("@")[1]
+        if any(domain in i for i in existing_admin_emails) # <-- SIGNING IN
+            st.success("Signing In")
+            st.session_state.email = email
+            st.session_state.page = signin_target_page
+        if not any(domain in i for i in existing_admin_emails) # <-- SIGNING UP  
+            st.success("Signing Up")
+            st.session_state.email = email
+            st.session_state.page = signup_target_page
+
 def display_admin_email_button(label, signin_target_page, signup_target_page):
     email = st.text_input("Email:")
     existing_emails = read_sheet_names()
@@ -29,11 +43,11 @@ def display_admin_profile_button(label, target_page, delete_account_target_page)
     email = st.session_state.email
     existing_headers = read_header(email)
     st.write(existing_headers)
-    add_header = st.text_input("Add Data Fields:") # <-- ADDING DATA FIELDS
-    if st.button("Add Data Fields"):
+    add_header = st.text_input("Add Data Field:") # <-- ADDING DATA FIELDS
+    if st.button("Add Data Field"):
         add_column(sheet_name=email, value=add_header) 
-    delete_header = st.text_input("Delete Data Fields:") # <-- DELETING DATA FIELDS
-    if st.button("Delete Data Fields"):
+    delete_header = st.text_input("Delete Data Field:") # <-- DELETING DATA FIELDS
+    if st.button("Delete Data Field"):
         delete_column(sheet_name=email, column_name=delete_header)
     if st.button("Delete Account"): # <-- DELETE ACCOUNT
         st.success("Deleting Account")

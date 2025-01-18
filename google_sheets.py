@@ -22,6 +22,13 @@ def read_values(sheet_name, row_name, column_name):
     elif row_name is not None and column_name is not None:
         values = df[df.iloc[:, 0] == row_name][[column_name]] 
     return values 
+    
+def edit_values(sheet_name, column_name, row_name, value):
+    column_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get("values", [[]])[0]
+    column_index = chr(65 + column_names.index(column_name))
+    row_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A:A").execute().get("values", [[]])
+    row_index = len(row_names) + 1 if row_name == "append" else [row[0] for row in row_names].index(row_name) + 1
+    service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}{row_index}", valueInputOption="RAW", body={"values": [[value]]}).execute()
 
 def create_sheet(sheet_name):
     service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"addSheet": {"properties": {"title": sheet_name}}}]}).execute()
@@ -37,13 +44,6 @@ def read_sheet():
     sheets = spreadsheets.get('sheets', [])
     sheet_names = [sheet["properties"]["title"] for sheet in sheets]
     return sheet_names
-
-def edit_cell(sheet_name, column_name, row_name, value):
-    column_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get("values", [[]])[0]
-    column_index = chr(65 + column_names.index(column_name))
-    row_names = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A:A").execute().get("values", [[]])
-    row_index = len(row_names) + 1 if row_name == "append" else [row[0] for row in row_names].index(row_name) + 1
-    service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}{row_index}", valueInputOption="RAW", body={"values": [[value]]}).execute()
 
 def read_column(sheet_name):
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()

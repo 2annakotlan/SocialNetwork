@@ -7,8 +7,9 @@ def display_button(label, target_page):
         st.session_state.page = target_page
 
 def display_student_email_button(label, signin_target_page, signup_target_page):
-    o = read_values('admin@falcon.bentley.edu', 'email', None)
+    o = read_values(sheet_name='admin@falcon.bentley.edu', column_name='email', row_name=None)
     st.write(o)
+    '''
     email = st.text_input("Email:")
     existing_admin_emails = read_sheet()
     if st.button(label):
@@ -27,7 +28,7 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
                 edit_values(sheet_name=admin_email, column_name="email", row_name="append", value=email)
         if not admin_email in existing_admin_emails: # <-- INSTITUTION HAS NOT MADE AN ACCOUNT
             st.error("Your Institution Has Not Made an Account with Us")
-        
+        '''
         '''
 
 

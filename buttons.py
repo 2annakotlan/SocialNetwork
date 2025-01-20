@@ -28,10 +28,11 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
             st.error("Your Institution Has Not Made an Account with Us")
 
 # STUDENT PROFILE BUTTON
-def display_student_profile_button(label, target_page, delete_account_target_page):
+def display_student_profile_button(label, target_page, delete_account_target_page): 
     email = st.session_state.email
     existing_headers = read_column(sheet_name=email)
     st.write(existing_headers)
+    
     '''
     add_column = st.text_input("Add Data Field:") # <-- ADDING DATA FIELDS
     if st.button("Add Data Field"):

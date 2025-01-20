@@ -33,8 +33,10 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
 def display_student_profile_button(label, target_page, delete_account_target_page): 
     email = st.session_state.email
     admin_email = st.session_state.admin_email
-    existing_headers = read_values(sheet_name=admin_email)
-    st.write(existing_headers)
+    st.write(email)
+    st.write(admin_email)
+    #existing_headers = read_values(sheet_name=admin_email)
+    #st.write(existing_headers)
     
     '''
     add_column = st.text_input("Add Data Field:") # <-- ADDING DATA FIELDS

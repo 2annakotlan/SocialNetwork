@@ -7,9 +7,6 @@ def display_button(label, target_page):
         st.session_state.page = target_page
 
 def display_student_email_button(label, signin_target_page, signup_target_page):
-    o = read_values(sheet_name='admin@falcon.bentley.edu', column_name='email', row_name=None)
-    st.write(o)
-'''
     email = st.text_input("Email:")
     existing_admin_emails = read_sheet()
     if st.button(label):

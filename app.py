@@ -13,6 +13,7 @@ def display_student_credentials_page():
 
 def display_student_profile_page():
     st.write("Student Profile Page")
+    display_student_profile_button(label="Enter", target_page=None, delete_account_target_page=None)
     display_button(label="Save Changes", target_page="student_landing_page")
 
 def display_student_landing_page():

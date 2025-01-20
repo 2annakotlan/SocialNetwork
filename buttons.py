@@ -13,8 +13,6 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
     if st.button(label):
         admin_email = f"admin@{email.split('@')[1]}"
         if admin_email in existing_admin_emails: 
-            st.write("yes")
-            '''
             existing_student_emails = read_values(sheet_name=admin_email, column_name="email", row_name=None)
             if email in existing_student_emails.values: # <-- SIGNING IN
                 st.success("Signing In")
@@ -27,7 +25,7 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
                 edit_values(sheet_name=admin_email, column_name="email", row_name="append", value=email)
         if not admin_email in existing_admin_emails: # <-- INSTITUTION HAS NOT MADE AN ACCOUNT
             st.error("Your Institution Has Not Made an Account with Us")
-        '''
+
 
 def display_admin_email_button(label, signin_target_page, signup_target_page):
     email = st.text_input("Email:")

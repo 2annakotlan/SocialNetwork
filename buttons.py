@@ -18,10 +18,12 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
             if email in existing_student_emails.values: # <-- SIGNING IN
                 st.success("Signing In")
                 st.session_state.email = email
+                st.session_state.admin_email = admin_email
                 st.session_state.page = signin_target_page
             if email not in existing_student_emails.values: # <-- SIGNING UP
                 st.success("Signing Up")
                 st.session_state.email = email
+                st.session_state.admin_email = admin_email
                 st.session_state.page = signup_target_page
                 edit_values(sheet_name=admin_email, column_name="email", row_name="append", value=email)
         if not admin_email in existing_admin_emails: # <-- INSTITUTION HAS NOT MADE AN ACCOUNT
@@ -30,7 +32,8 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
 # STUDENT PROFILE BUTTON
 def display_student_profile_button(label, target_page, delete_account_target_page): 
     email = st.session_state.email
-    existing_headers = read_column(sheet_name=email)
+    admin_email = st.session_state.admin_email
+    existing_headers = read_values(sheet_name=admin_email)
     st.write(existing_headers)
     
     '''

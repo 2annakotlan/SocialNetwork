@@ -26,6 +26,9 @@ def display_student_email_button(label, signin_target_page, signup_target_page):
                 st.session_state.admin_email = admin_email
                 st.session_state.page = signup_target_page
                 edit_values(sheet_name=admin_email, column_name="email", row_name="append", value=email)
+                edit_values(sheet_name=admin_email, column_name="friends", row_name=email, value=None)
+                edit_values(sheet_name=admin_email, column_name="activities", row_name=email, value=None)
+                edit_values(sheet_name=admin_email, column_name="interests", row_name=email, value=None)
         if not admin_email in existing_admin_emails: # <-- INSTITUTION HAS NOT MADE AN ACCOUNT
             st.error("Your Institution Has Not Made an Account with Us")
 

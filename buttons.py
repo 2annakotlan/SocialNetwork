@@ -39,9 +39,10 @@ def display_student_profile_button(label, target_page, delete_account_target_pag
     student_profile_info = read_values(sheet_name=admin_email, column_name=None, row_name=email)
     st.write(student_profile_info)
     for i in student_profile_info:
-        edit_value = st.text_input(f"Edit {i}:") # <-- ADDING INFO
-        if st.button(f"Edit {i}"):
-        edit_values(sheet_name=admin_email, column_name=i, row_name='email', value=edit_value)
+        edit_value = st.text_input(f"Edit {i}:")  
+        if st.button(f"Edit {i}"):  
+            edit_values(sheet_name=admin_email, column_name=i, row_name='email', value=edit_value)
+
     '''
     delete_column = st.text_input("Delete Data Field:") # <-- DELETING DATA FIELDS
     if st.button("Delete Data Field"):

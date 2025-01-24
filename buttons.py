@@ -38,7 +38,9 @@ def display_student_profile_button(label, target_page, delete_account_target_pag
     admin_email = st.session_state.admin_email 
     student_profile_info = read_values(sheet_name=admin_email, column_name=None, row_name=email)
     st.write(student_profile_info)
-    add_value = st.text_input("Add Info:") # <-- ADDING INFO
+    for i in student_profile_info.list()
+        print(i)
+    add_value = st.text_input("Add Friends:") # <-- ADDING INFO
     if st.button("Edit Friends"):
         edit_values(sheet_name=admin_email, column_name='friends', row_name='email', value=add_value)
     '''

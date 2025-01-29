@@ -32,6 +32,10 @@ def edit_values(sheet_name, column_name, row_name, value):
     row_index = len(row_names) + 1 if row_name == "append" else [row[0] for row in row_names].index(row_name) + 1
     service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{column_index}{row_index}", valueInputOption="RAW", body={"values": [[value]]}).execute()
 
+def insert_row(sheet_name, values):
+    next_row = len(service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A:A").execute().get("values", [])) + 1
+    service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A{next_row}", valueInputOption="RAW", body={"values": [values]}).execute()
+
 def delete_row(sheet_name, row_name):
     row_values = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A:A").execute().get("values", [[]])
     row_index = next(i for i, row in enumerate(row_values, start=1) if row and row[0] == row_name)

@@ -13,8 +13,7 @@ def display_student_credentials_page():
 
 def display_student_profile_page():
     st.write("Student Profile Page")
-    display_student_profile_button(label="Enter", target_page=None, delete_account_target_page=None)
-    display_button(label="Save Changes", target_page="student_landing_page")
+    display_student_profile_button(label="Home", target_page="student_landing_page", delete_account_target_page="landing_page")
 
 def display_student_landing_page():
     st.write("Student Landing Page")
@@ -28,7 +27,7 @@ def display_admin_credentials_page():
 
 def display_admin_profile_page():
     st.write("Admin Profile Page")
-    display_admin_profile_button(label="Admin Page", target_page="admin_landing_page", delete_account_target_page="landing_page")
+    display_admin_profile_button(label="Home", target_page="admin_landing_page", delete_account_target_page="landing_page")
 
 def display_admin_landing_page():
     st.write("Admin Landing Page")

@@ -40,21 +40,16 @@ def display_student_profile_button(label, target_page, delete_account_target_pag
     st.write(student_profile_info)
     for i in student_profile_info:
         edit_value = st.text_input(f"Edit {i}:")  
-        if st.button(f"Edit {i}"):  
+        if st.button(f"Edit {i}"): # <-- EDIT INFO
             edit_values(sheet_name=admin_email, column_name=i, row_name=email, value=edit_value)
-
-    '''
-    delete_column = st.text_input("Delete Data Field:") # <-- DELETING DATA FIELDS
-    if st.button("Delete Data Field"):
-        delete_column(sheet_name=email, column_name=delete_column)
     if st.button("Delete Account"): # <-- DELETE ACCOUNT
         st.success("Deleting Account")
-        delete_sheet(sheet_name=email)
+        delete_row(admin_email, email)
         st.session_state.page = delete_account_target_page
         st.session_state.email = None
     if st.button(label): # <-- HOME PAGE
         st.session_state.page = target_page
-    '''
+
 
 # ADMIN CREDENTIALS BUTTON
 def display_admin_email_button(label, signin_target_page, signup_target_page):

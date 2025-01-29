@@ -45,7 +45,7 @@ def display_student_profile_button(label, target_page, delete_account_target_pag
             edit_values(sheet_name=admin_email, column_name=i, row_name=email, value=edit_value)
     if st.button("Delete Account"): # <-- DELETE ACCOUNT
         st.success("Deleting Account")
-        delete_row(admin_email, email)
+        delete_row(sheet_name=admin_email, row_name=email)
         st.session_state.page = delete_account_target_page
         st.session_state.email = None
     if st.button(label): # <-- HOME PAGE
@@ -66,6 +66,7 @@ def display_admin_email_button(label, signin_target_page, signup_target_page):
             st.success("Signing Up")
             st.session_state.email = email
             st.session_state.page = signup_target_page
+            edit_values(sheet_name=admin, column_name="email", row_name="append", value=email)
             create_sheet(sheet_name=email)
             add_column(sheet_name=email, value="email")
             add_column(sheet_name=email, value="friends")
@@ -81,10 +82,11 @@ def display_admin_profile_button(label, target_page, delete_account_target_page)
     if st.button("Add Data Field"):
         add_column(sheet_name=email, value=add_column) 
     delete_column = st.text_input("Delete Data Field:") # <-- DELETING DATA FIELDS
-    if st.button("Delete Data Field"):
+    if st.button("Delete Data Field") and delete_column != "email":
         delete_column(sheet_name=email, column_name=delete_column)
     if st.button("Delete Account"): # <-- DELETE ACCOUNT
         st.success("Deleting Account")
+        delete_row(sheet_name="admin", row_name=email)
         delete_sheet(sheet_name=email)
         st.session_state.page = delete_account_target_page
         st.session_state.email = None

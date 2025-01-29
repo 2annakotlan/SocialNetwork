@@ -77,12 +77,12 @@ def display_admin_profile_button(label, target_page, delete_account_target_page)
     email = st.session_state.email
     existing_headers = read_column(sheet_name=email)
     st.write(existing_headers)
-    add_column = st.text_input("Add Data Field:") # <-- ADDING DATA FIELDS
+    adding_column = st.text_input("Add Data Field:") # <-- ADDING DATA FIELDS
     if st.button("Add Data Field"):
-        add_column(sheet_name=email, value=add_column) 
-    delete_column = st.text_input("Delete Data Field:") # <-- DELETING DATA FIELDS
-    if st.button("Delete Data Field") and delete_column != "email":
-        delete_column(sheet_name=email, column_name=delete_column)
+        add_column(sheet_name=email, value=adding_column) 
+    deleting_column = st.text_input("Delete Data Field:") # <-- DELETING DATA FIELDS
+    if st.button("Delete Data Field") and deleting_column != "email":
+        delete_column(sheet_name=email, column_name=deleting_column)
     if st.button("Delete Account"): # <-- DELETE ACCOUNT
         st.success("Deleting Account")
         delete_sheet(sheet_name=email)
